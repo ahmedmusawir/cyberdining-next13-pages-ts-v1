@@ -1,4 +1,5 @@
 import { Container, Hero, Row } from "../ui-ux";
+import FeaturedCities from "../ui-ux/FeaturedCities";
 import FeaturedCuisines from "../ui-ux/FeaturedCuisines";
 import FeaturedRestaurants from "../ui-ux/FeaturedRestaurants";
 
@@ -20,6 +21,9 @@ const HomeContent = () => {
       </Row>
       <Row>
         <FeaturedCuisines />
+      </Row>
+      <Row>
+        <FeaturedCities />
       </Row>
     </Container>
   );

@@ -19,7 +19,9 @@ const posts = [
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550556/54337931_p834um.webp",
+      // "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550556/54337931_p834um.webp",
+      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554590/51255427_o1ggyp.webp",
+
     date: "Mar 16, 2020",
     datetime: "2020-03-16",
   },
@@ -42,7 +44,7 @@ const FeaturedCuisines = () => {
     <div className="bg-white py-2 sm:py-3">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight  text-indigo-600 sm:text-4xl">
             Top Cuisines
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
