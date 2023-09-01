@@ -7,9 +7,7 @@ interface Props {
 
 function Main({ children, className }: Props) {
   return (
-    <main className={`min-w-full flex flex-grow my-10 ${className}`}>
-      {children}
-    </main>
+    <main className={`min-w-full flex flex-grow ${className}`}>{children}</main>
   );
 }
 
