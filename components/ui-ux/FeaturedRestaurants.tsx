@@ -1,4 +1,5 @@
 import React from "react";
+import { StarIcon } from "@heroicons/react/24/solid";
 
 const posts = [
   {
@@ -37,6 +38,12 @@ const posts = [
     datetime: "2020-03-16",
   },
 ];
+
+const review = 4;
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const FeaturedRestaurants = () => {
   return (
@@ -91,7 +98,19 @@ const FeaturedRestaurants = () => {
                     {post.description}
                   </p>
                 </div>
-                <div className="relative mt-8 flex items-center gap-x-4">
+                <div className="relative mt-8 items-center gap-x-4 flex  justify-between">
+                  <div className="flex items-center">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <StarIcon
+                        key={rating}
+                        className={classNames(
+                          review > rating ? "text-yellow-400" : "text-gray-200",
+                          "h-5 w-5 flex-shrink-0"
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
                   <button
                     type="button"
                     className="rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"

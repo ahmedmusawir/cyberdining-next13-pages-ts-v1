@@ -41,6 +41,7 @@ const Navbar = () => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-between items-center">
               <div className="flex flex-grow">
+                {/* SITE LOGO IMG START */}
                 <Link href="/">
                   <div className="flex-shrink-0">
                     <img
@@ -50,6 +51,9 @@ const Navbar = () => {
                     />
                   </div>
                 </Link>
+                {/* SITE LOGO IMG END */}
+
+                {/* SITE LOGO TEXT START */}
                 <div className="flex-grow">
                   <div className="flex justify-between space-x-4">
                     <Link
@@ -58,25 +62,21 @@ const Navbar = () => {
                     >
                       CyberDining
                     </Link>
+                    {/* SITE LOGO TEXT END */}
+                    {/* DESKTOP MENU START */}
                     <nav className="hidden sm:ml-6 sm:flex flex-grow justify-center items-center">
+                      <NavLink href="/search-page">Search</NavLink>
                       <NavLink href="/template">Template</NavLink>
                       <NavLink href="/demo">Demo</NavLink>
                     </nav>
+                    {/* DESKTOP MENU END */}
                   </div>
                 </div>
               </div>
+
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex items-center">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-
-                  {/* Profile dropdown */}
+                  {/* DESKTOP PROFILE DROPDOWN START */}
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -141,10 +141,11 @@ const Navbar = () => {
                       </Menu.Items>
                     </Transition>
                   </Menu>
+                  {/* DESKTOP PROFILE DROPDOWN END */}
                 </div>
               </div>
               <div className="-mr-2 flex sm:hidden">
-                {/* Mobile menu button */}
+                {/* MOBILE MENU HAMBURGER BUTTON START */}
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
@@ -154,13 +155,14 @@ const Navbar = () => {
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
+                {/* MOBILE MENU HAMBURGER BUTTON END */}
               </div>
             </div>
           </div>
+          {/* MOBILE MENU START*/}
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pb-3 pt-2">
-              {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
               <Disclosure.Button
                 as="a"
                 href="#"
@@ -190,6 +192,11 @@ const Navbar = () => {
                 Calendar
               </Disclosure.Button>
             </div>
+
+            {/* MOBILE MENU END */}
+
+            {/* MOBILE PROFILE MENU START */}
+
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
@@ -201,7 +208,7 @@ const Navbar = () => {
                 </div>
                 <div className="ml-3">
                   <div className="text-base font-medium text-white">
-                    Tom Cook
+                    Tom CookEE
                   </div>
                   <div className="text-sm font-medium text-gray-400">
                     tom@example.com
@@ -216,29 +223,32 @@ const Navbar = () => {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
+
               <div className="mt-3 space-y-1 px-2">
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                 >
-                  Your Profile
+                  Your Profile ...
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                 >
-                  Settings
+                  Settings ...
                 </Disclosure.Button>
                 <Disclosure.Button
                   as="a"
                   href="#"
                   className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
                 >
-                  Sign out
+                  Sign out ...
                 </Disclosure.Button>
               </div>
+
+              {/* MOBILE PROFILE MENU END*/}
             </div>
           </Disclosure.Panel>
         </>

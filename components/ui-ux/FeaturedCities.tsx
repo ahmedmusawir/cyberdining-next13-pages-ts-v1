@@ -11,7 +11,7 @@ const posts = [
       "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693548606/atlanta_kxdt9u.jpg",
   },
   {
-    id: 1,
+    id: 2,
     title: "Savanna",
     href: "#",
     description:
@@ -20,7 +20,7 @@ const posts = [
       "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693548607/savanna_mj4ngr.jpg",
   },
   {
-    id: 1,
+    id: 3,
     title: "Alpharetta",
     href: "#",
     description:

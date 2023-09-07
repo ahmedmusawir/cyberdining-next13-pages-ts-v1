@@ -13,7 +13,7 @@ const posts = [
     datetime: "2020-03-16",
   },
   {
-    id: 1,
+    id: 2,
     title: "Fine Dining",
     href: "#",
     description:
@@ -26,7 +26,7 @@ const posts = [
     datetime: "2020-03-16",
   },
   {
-    id: 1,
+    id: 3,
     title: "Mexican",
     href: "#",
     description:
