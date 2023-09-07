@@ -1,4 +1,5 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import Pagination from "./Pagination";
 
 const posts = [
   {
@@ -37,6 +38,18 @@ const posts = [
     datetime: "2020-03-16",
     category: { title: "Italian", href: "#" },
   },
+  {
+    id: 4,
+    title: "Eat All You Can",
+    href: "#",
+    description:
+      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
+    imageUrl:
+      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550268/52663349_ssymlb.webp",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
+    category: { title: "Chinese", href: "#" },
+  },
   // More posts...
 ];
 
@@ -45,6 +58,8 @@ const review = 4;
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
+
+const onPageChange = () => {};
 
 const RestaurantList = () => {
   return (
@@ -121,6 +136,13 @@ const RestaurantList = () => {
               </article>
             ))}
           </div>
+          <Pagination
+            currentPage={1}
+            totalPageCount={5}
+            onPageChange={onPageChange}
+            pageSize={4}
+            totalItemCount={10}
+          />
         </div>
       </div>
     </div>
