@@ -4,6 +4,8 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { Page } from "../globals";
 import Head from "next/head";
+import Reviews from "../ui-ux/Reviews";
+import TabbedContent from "../ui-ux/TabbedContent";
 
 const user = {
   name: "Tom Cook",
@@ -49,8 +51,8 @@ const RestaurantSingleContent = () => {
               <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
             {/* Header Content */}
-            <div className="relative z-20 mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            <div className="relative z-20 mx-auto max-w-2xl text-center  -mt-12">
+              <h2 className="font-bold tracking-tight text-white sm:text-4xl">
                 Cyberize Cafe
               </h2>
             </div>
@@ -65,83 +67,12 @@ const RestaurantSingleContent = () => {
                 <div className="grid grid-cols-1 gap-4 lg:col-span-2">
                   <section aria-labelledby="section-1-title">
                     <h2 className="sr-only" id="section-1-title">
-                      Section title
+                      Left Column
                     </h2>
-                    <div className="overflow-hidden rounded-lg bg-white shadow">
+                    {/* <div className="overflow-hidden rounded-lg bg-white shadow"> */}
+                    <div className="rounded-lg bg-white shadow">
                       <div className="p-6">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Voluptates perspiciatis, dicta tempora reiciendis ab
-                        nisi, porro incidunt delectus iure fugit consectetur
-                        iusto. Sunt doloremque placeat distinctio illo tenetur
-                        voluptate, obcaecati assumenda ea eum, numquam optio
-                        dolor natus cumque! Itaque dicta provident quibusdam.
-                        Aperiam ad ducimus, non molestiae impedit quisquam
-                        ipsum, alias, cumque minima dolorum possimus? Eos,
-                        laudantium asperiores enim obcaecati quis dolorum et
-                        omnis eligendi sequi! Atque voluptatem quisquam cum
-                        dolorem neque. Vel, dignissimos? Totam, veniam. Veniam
-                        atque, minima velit quisquam libero provident aut nobis
-                        aspernatur pariatur, dicta molestiae? Atque ipsa modi
-                        eum ipsam eaque itaque, necessitatibus perspiciatis
-                        maxime, nesciunt tenetur, dolor dolores esse beatae
-                        illo. Tenetur labore sit inventore quis excepturi cumque
-                        quos quibusdam totam! Alias suscipit facere harum quasi
-                        aliquam! Totam eum possimus corporis mollitia autem
-                        dolores voluptas ad, ab quibusdam repellat temporibus
-                        perspiciatis quas porro? Animi doloribus corrupti atque
-                        pariatur ex dolores quod mollitia enim, cumque, totam,
-                        possimus nesciunt aut illum? Expedita recusandae sunt
-                        pariatur nostrum, eum reiciendis accusantium et nam
-                        excepturi molestias laborum ipsa. Eaque eligendi totam
-                        repellendus consequatur, magnam optio laborum sit? Quae,
-                        iure, adipisci porro consequuntur ducimus officiis
-                        voluptatem veniam facere quidem necessitatibus,
-                        dignissimos consequatur. Dolore repellendus natus
-                        nostrum provident veniam reiciendis voluptatibus aut
-                        sunt, quas minus inventore officia quos. Vitae incidunt
-                        corrupti dignissimos, illum, voluptas provident neque
-                        quas facilis obcaecati ea quo alias nam pariatur quia
-                        nisi itaque. Assumenda nisi voluptates labore!
-                        Laudantium sequi, neque quia consequuntur accusantium
-                        beatae illum deserunt doloremque, ipsum, recusandae
-                        velit eveniet repellat fuga quod molestias! Eum
-                        accusamus temporibus ut doloribus architecto optio
-                        placeat, non ad sint est quo consequatur? Excepturi,
-                        labore! Perspiciatis rem a odit dignissimos animi.
-                        Aliquam, eius quidem. Neque pariatur illum repellendus
-                        cum natus ratione quasi libero suscipit sequi commodi,
-                        inventore explicabo animi unde quisquam dolor quibusdam
-                        voluptates illo minus eius ipsum rerum fugit quos.
-                        Molestiae odio excepturi ut numquam necessitatibus
-                        voluptates voluptas magnam placeat, totam consequatur
-                        dolores, quasi illo quisquam dicta, perspiciatis
-                        tempore. Voluptate beatae dolore vero? Dolorum ducimus
-                        ex, repellendus sunt earum officia inventore blanditiis
-                        illum fuga dicta enim esse totam beatae quis voluptas,
-                        pariatur iste vel quasi aut eligendi hic dolores? Maxime
-                        delectus quos, suscipit, cum, consectetur quaerat
-                        asperiores sit aperiam ab repellendus harum est.
-                        Voluptatem architecto, temporibus fugiat magni quas eos
-                        ratione in atque itaque excepturi amet. Illo magnam
-                        corporis hic distinctio doloribus temporibus est
-                        explicabo sint, perferendis sapiente eius facere,
-                        corrupti suscipit dolorem accusamus fugit quos quam ut
-                        in mollitia similique incidunt commodi. Iusto,
-                        distinctio? Accusamus illo repellat dolorum est,
-                        deserunt, error possimus voluptatibus ipsam natus rerum
-                        officia aut velit distinctio recusandae consectetur
-                        adipisci doloremque explicabo nesciunt ea? Vel, nulla
-                        cupiditate, ipsum aliquam incidunt sunt quae quidem
-                        voluptatem molestias libero necessitatibus praesentium
-                        omnis fugiat cum, aspernatur voluptas cumque nobis
-                        ducimus placeat? Dolores sapiente earum ratione beatae
-                        nihil commodi exercitationem similique soluta labore
-                        totam quasi repellat deleniti eligendi veritatis rem
-                        assumenda quibusdam, magnam sit doloremque? Ducimus
-                        consectetur culpa labore quaerat beatae eaque optio
-                        dolores autem in vel atque omnis pariatur numquam a
-                        sequi, blanditiis saepe recusandae ea magni alias eum,
-                        corrupti totam.
+                        <TabbedContent />
                       </div>
                     </div>
                   </section>
@@ -151,7 +82,7 @@ const RestaurantSingleContent = () => {
                 <div className="grid grid-cols-1 gap-4">
                   <section aria-labelledby="section-2-title">
                     <h2 className="sr-only" id="section-2-title">
-                      Restaurant Info
+                      Right Column
                     </h2>
                     <div className="overflow-hidden rounded-lg bg-white shadow">
                       <div className="p-6">
@@ -178,6 +109,7 @@ const RestaurantSingleContent = () => {
               </div>
             </div>
           </main>
+          <Reviews />
         </div>
       </Page>
     </>
