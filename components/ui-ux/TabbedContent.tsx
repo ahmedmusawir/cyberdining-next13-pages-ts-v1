@@ -5,6 +5,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
 import ImageList from "../data-view/ImageList";
+import MenuList from "../data-view/MenuList";
 
 const faqs = [
   {
@@ -170,10 +171,7 @@ const TabbedContent = () => {
           <Tab.Panel className="pt-10">
             <h3 className="sr-only">Menu</h3>
 
-            <div
-              className="prose prose-sm max-w-none text-gray-500"
-              dangerouslySetInnerHTML={{ __html: license.content }}
-            />
+            <MenuList />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

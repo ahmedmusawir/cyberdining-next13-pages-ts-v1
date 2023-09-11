@@ -6,6 +6,7 @@ import { Page } from "../globals";
 import Head from "next/head";
 import Reviews from "../ui-ux/Reviews";
 import TabbedContent from "../ui-ux/TabbedContent";
+import BookingForm from "../forms/BookingForm";
 
 const user = {
   name: "Tom Cook",
@@ -86,22 +87,7 @@ const RestaurantSingleContent = () => {
                     </h2>
                     <div className="overflow-hidden rounded-lg bg-white shadow">
                       <div className="p-6">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing
-                        elit. Adipisci nisi, aliquam nostrum quibusdam molestias
-                        animi unde quas possimus quisquam sapiente dolorum rem
-                        labore ipsam officiis consectetur a. Soluta laborum
-                        molestias assumenda excepturi sunt aut omnis facilis
-                        cumque maiores aliquam, odit laboriosam unde officiis
-                        corporis sed iure deleniti. Natus exercitationem nisi,
-                        sit praesentium non quae aliquam nam quos cumque
-                        deleniti culpa debitis incidunt obcaecati quod nihil
-                        ratione odio adipisci. Sit cumque rem ducimus molestiae
-                        ad doloribus dolore alias odit! Reprehenderit nobis,
-                        nihil quos eum dolorum, iure incidunt similique hic,
-                        possimus dolor aspernatur voluptatem voluptas dolore! Ut
-                        eaque, eveniet, tempora nemo voluptate, facere vero quos
-                        tenetur culpa provident rerum temporibus. Doloribus
-                        corrupti ipsa temporibus, aspernatur voluptatum, nemo
+                        <BookingForm />
                       </div>
                     </div>
                   </section>

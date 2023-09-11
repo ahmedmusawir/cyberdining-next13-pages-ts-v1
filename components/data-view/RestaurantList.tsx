@@ -1,11 +1,12 @@
 import { StarIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import Pagination from "./Pagination";
 
 const posts = [
   {
     id: 1,
     title: "Cyberize Dining",
-    href: "#",
+    slug: "cyberize-dining",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
     imageUrl:
@@ -17,7 +18,7 @@ const posts = [
   {
     id: 2,
     title: "Moose is Loose",
-    href: "#",
+    slug: "moose-is-loose",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
     imageUrl:
@@ -29,7 +30,7 @@ const posts = [
   {
     id: 3,
     title: "Star Bucks",
-    href: "#",
+    slug: "star-bucks",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
     imageUrl:
@@ -41,7 +42,7 @@ const posts = [
   {
     id: 4,
     title: "Eat All You Can",
-    href: "#",
+    slug: "eat-all-you-can",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
     imageUrl:
@@ -81,28 +82,27 @@ const RestaurantList = () => {
                 className="relative isolate flex flex-col gap-8 lg:flex-row px-5 md:px-10"
               >
                 <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
-                  <img
-                    src={post.imageUrl}
-                    alt=""
-                    className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
-                  />
-                  <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                  <Link href={`/restaurants/${post.slug}`}>
+                    <img
+                      src={post.imageUrl}
+                      alt=""
+                      className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
+                    />
+                    <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
+                  </Link>
                 </div>
                 <div className="">
                   <div className="flex items-center gap-x-4 text-xs">
-                    <a
-                      href={post.category.href}
-                      className="relative z-10 rounded-full bg-indigo-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
-                    >
+                    <span className="relative z-10 rounded-full bg-indigo-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
                       {post.category.title}
-                    </a>
+                    </span>
                   </div>
                   <div className="group relative max-w-xl">
                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                      <a href={post.href}>
-                        <span className="absolute inset-0" />
+                      {/* <span className="absolute inset-0" /> */}
+                      <Link href={`/restaurants/${post.slug}`}>
                         {post.title}
-                      </a>
+                      </Link>
                     </h3>
                     <p className="mt-5 text-sm leading-6 text-gray-600">
                       {post.description}
