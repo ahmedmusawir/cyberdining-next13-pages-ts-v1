@@ -11,8 +11,8 @@ import SidebarNav from "../ui-ux/SidebarNav";
 import SidebarDesktop from "../ui-ux/SidebarDesktop";
 import SearchForm from "../forms/SearchForm";
 import JobSortForm from "../forms/JobSortForm";
-import DataList from "../data-view/DataList";
-import RestaurantList from "../data-view/RestaurantList";
+import DataList from "../list-view/DataList";
+import RestaurantList from "../list-view/RestaurantList";
 
 const JobsPageContent = () => {
   return <JobBoard />;

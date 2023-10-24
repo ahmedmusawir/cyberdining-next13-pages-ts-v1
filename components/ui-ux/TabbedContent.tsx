@@ -4,8 +4,8 @@ import {
   ChatBubbleBottomCenterTextIcon,
 } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
-import ImageList from "../data-view/ImageList";
-import MenuList from "../data-view/MenuList";
+import ImageList from "../list-view/ImageList";
+import MenuList from "../list-view/MenuList";
 
 const faqs = [
   {

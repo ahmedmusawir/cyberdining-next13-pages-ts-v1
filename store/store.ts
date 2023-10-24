@@ -1,4 +1,4 @@
-import { apiPost } from "@/services/apiPosts";
+import { apiPost } from "@/features/posts/apiPosts";
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
