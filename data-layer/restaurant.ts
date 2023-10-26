@@ -195,76 +195,85 @@ export const getRestaurantById = async (
   return rawRestaurant;
 };
 
-// RESTAURANT SEARCH AND FILTERS
+// RESTAURANTS BY SEARH AND FILTERS
+export const getAllRestaurantsBySearchFilters = async (
+  searchFilterQuery: FiltersState
+): Promise<RestaurantApiResponse> => {
+  let cuisineIdsArray: string[] = [];
+  let locationIdsArray: string[] = [];
 
-export const searchRestaurants = async (
-  query: FiltersState
-): Promise<PostApiResponse> => {
-  let categoryTermsArray: string[] = [];
-  let postTagTermsArray: string[] = [];
-
-  console.log("Current Page:", query.currentPage);
-  console.log("Restaurants Per Page:", query.postsPerPage);
+  // console.log("Current Page:", searchFilterQuery.currentPage);
+  // console.log("Posts Per Page:", searchFilterQuery.postsPerPage);
+  console.log(
+    "SEARCH FILTER QUERY IN RESTAURANTS IN DATA LAYER:",
+    searchFilterQuery
+  );
 
   // PROCESSING CATEGORY ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
-  if (query.categoryTerms) {
-    if (typeof query.categoryTerms === "string") {
-      categoryTermsArray = (query.categoryTerms as string).split(","); // Convert comma-separated string to array
+  if (searchFilterQuery.cuisineIds) {
+    if (typeof searchFilterQuery.cuisineIds === "string") {
+      cuisineIdsArray = (searchFilterQuery.cuisineIds as string).split(","); // Convert comma-separated string to array
     } else {
-      categoryTermsArray = query.categoryTerms as string[];
+      cuisineIdsArray = searchFilterQuery.cuisineIds as string[];
     }
   }
-  // PROCESSING RESTAURANT TAG ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
-  if (query.postTagTerms) {
-    if (typeof query.postTagTerms === "string") {
-      postTagTermsArray = (query.postTagTerms as string).split(","); // Convert comma-separated string to array
+  // PROCESSING POST TAG ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
+  if (searchFilterQuery.locationIds) {
+    if (typeof searchFilterQuery.locationIds === "string") {
+      locationIdsArray = (searchFilterQuery.locationIds as string).split(","); // Convert comma-separated string to array
     } else {
-      postTagTermsArray = query.postTagTerms as string[];
+      locationIdsArray = searchFilterQuery.locationIds as string[];
     }
   }
-
   const fields = [
-    "title",
-    "content",
+    "name",
+    "description",
     "slug",
-    "categories.name",
-    "post_tags.name",
+    "price",
+    "menuItems.name",
+    "menuItems.description",
+    "location.name",
+    "cuisines.name",
   ];
 
-  const searchFields = query.searchTerm
-    ? generateSearchFields(query.searchTerm, fields)
+  const searchFields = searchFilterQuery.searchTerm
+    ? generateSearchFields(searchFilterQuery.searchTerm, fields)
     : [];
 
-  const strapiQuery = {
-    populate: ["categories", "post_tags"],
-    // Add pagination parameters
-    "pagination[start]": (query.currentPage - 1) * query.postsPerPage,
-    "pagination[limit]": query.postsPerPage,
+  // Get search results:
+  const query = qs.stringify(
+    {
+      fields: ["name"],
 
-    filters: {
-      ...(query.isFeatured && { isFeatured: { $eq: true } }),
+      filters: {
+        ...(searchFilterQuery.isFeatured && { isFeatured: { $eq: true } }),
+        ...(searchFilterQuery.hasOnlineOrdering && {
+          hasOnlineOrdering: { $eq: true },
+        }),
+        ...(cuisineIdsArray.length && {
+          cuisines: {
+            id: { $in: cuisineIdsArray.map((catId) => Number(catId)) }, // Converting id string to number
+          },
+        }),
+        ...(locationIdsArray.length && {
+          location: {
+            id: { $in: locationIdsArray.map((catId) => Number(catId)) }, // Converting id string to number
+          },
+        }),
+        $or: searchFields,
+      },
 
-      ...(categoryTermsArray.length && {
-        categories: {
-          id: { $in: categoryTermsArray.map((catId) => Number(catId)) }, // Converting id string to number
-        },
-      }),
-
-      ...(postTagTermsArray?.length && {
-        post_tags: {
-          id: { $in: postTagTermsArray.map((tagId) => Number(tagId)) }, // Converting id string to number
-        },
-      }),
-
-      ...(searchFields.length > 0 && { $or: searchFields }),
+      populate: "*",
+      // populate: ["location, cuisines"],
     },
-  };
 
-  console.log("query in Data Layer:", query);
+    {
+      encodeValuesOnly: true,
+      // arrayFormat: "brackets", NEVER USE THIS
+    }
+  );
 
-  const strapiQueryStr = qs.stringify(strapiQuery, { encodeValuesOnly: true });
-  console.log("Final Query String in post.ts:", strapiQueryStr);
-  const response = await postService.getAll(strapiQueryStr);
+  const response = await restaurantService.getAll(query);
 
   return response;
 };

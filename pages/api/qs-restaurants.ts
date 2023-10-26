@@ -9,10 +9,11 @@ export default async function handler(
   const cuisineId = 5;
   // const searchTerm = "world";
   // const searchTerm = "atlanta";
-  const searchTerm = "";
+  const searchTerm = "taco";
   const isFeatured = true;
   const hasOnlineOrdering = true;
   const cuisineIdArray = ["8"]; // Indian & Mexican
+  const locationIdArray = ["3", "1"]; // Atlanta & Marietta
   const fields = [
     "name",
     "description",
@@ -35,21 +36,26 @@ export default async function handler(
     {
       sort: ["id:asc"],
 
-      fields: ["name"],
+      fields: ["name", "isFeatured", "hasOnlineOrdering"],
 
       filters: {
-        // ...(isFeatured && { isFeatured: { $eq: true } }),
-        // ...(hasOnlineOrdering && { hasOnlineOrdering: { $eq: true } }),
+        ...(isFeatured && { isFeatured: { $eq: true } }),
+        ...(hasOnlineOrdering && { hasOnlineOrdering: { $eq: true } }),
         ...(cuisineIdArray.length && {
           cuisines: {
             id: { $in: cuisineIdArray.map((catId) => Number(catId)) }, // Converting id string to number
+          },
+        }),
+        ...(locationIdArray.length && {
+          location: {
+            id: { $in: locationIdArray.map((catId) => Number(catId)) }, // Converting id string to number
           },
         }),
 
         $or: searchFields,
       },
 
-      populate: ["cuisines"],
+      populate: ["location", "cuisines"],
       // populate: "*",
     },
 

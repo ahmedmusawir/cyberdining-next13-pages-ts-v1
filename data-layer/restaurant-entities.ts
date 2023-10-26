@@ -1,3 +1,4 @@
+import { FiltersState } from "@/global-entities";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 
 export interface RestaurantDataSource {
@@ -14,7 +15,9 @@ export interface RestaurantDataSource {
   getRestaurantSlugs: () => Promise<string[]>;
   getRestaurantBySlug: (slug: string) => Promise<RestaurantData>;
   getRestaurantById: (postId: number) => Promise<RestaurantData>;
-  // searchRestaurants: (query: FiltersState) => Promise<PostApiResponse>;
+  getAllRestaurantsBySearchFilters: (
+    query: FiltersState
+  ) => Promise<RestaurantApiResponse>;
 }
 
 export interface RestaurantData {

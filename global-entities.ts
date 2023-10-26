@@ -24,11 +24,13 @@ export interface AuthState {
 export interface FiltersState {
   searchTerm?: string;
   isFeatured?: boolean;
-  categoryTerms?: string[];
-  postTagTerms?: string[];
+  hasOnlineOrdering?: boolean;
+  cuisineIds: string[];
+  locationIds: string[];
   currentPage: number;
-  postsPerPage: number;
-  switchButtonEnabled: boolean;
+  restaurantsPerPage: number;
+  isFeaturedButtonEnabled: boolean;
+  hasOnlineOrderingButtonEnabled: boolean;
 }
 
 export interface PostsState {
