@@ -5,7 +5,7 @@ const BASE_URL = "http://127.0.0.1:1337/api"; //IP is a must in Mac... localhost
 export const qsToStrapi = async (endpoint: string) => {
   const STRAPI_API_KEY = process.env.STRAPI_API_KEY;
 
-  console.log("api key", STRAPI_API_KEY);
+  // console.log("api key", STRAPI_API_KEY);
 
   const headers = {
     Authorization: `Bearer ${STRAPI_API_KEY}`,

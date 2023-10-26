@@ -1,30 +1,66 @@
 import qs from "qs";
 import { NextApiRequest, NextApiResponse } from "next";
-import { qsToStrapi } from "@/utils";
+import { generateSearchFields, qsToStrapi } from "@/utils";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // Example usage:
+  const cuisineId = 5;
+  // const searchTerm = "world";
+  // const searchTerm = "atlanta";
+  const searchTerm = "";
+  const isFeatured = true;
+  const hasOnlineOrdering = true;
+  const cuisineIdArray = ["8"]; // Indian & Mexican
+  const fields = [
+    "name",
+    "description",
+    "slug",
+    "price",
+    "menuItems.name",
+    "menuItems.description",
+    "location.name",
+    "cuisines.name",
+  ];
+
+  const searchFields = searchTerm
+    ? generateSearchFields(searchTerm, fields)
+    : [];
+
+  console.log("Search Fields", searchFields);
+
+  // Get search results:
   const query = qs.stringify(
     {
       sort: ["id:asc"],
 
-      fields: [],
+      fields: ["name"],
 
-      filters: {},
+      filters: {
+        // ...(isFeatured && { isFeatured: { $eq: true } }),
+        // ...(hasOnlineOrdering && { hasOnlineOrdering: { $eq: true } }),
+        ...(cuisineIdArray.length && {
+          cuisines: {
+            id: { $in: cuisineIdArray.map((catId) => Number(catId)) }, // Converting id string to number
+          },
+        }),
 
-      populate: "*",
+        $or: searchFields,
+      },
+
+      populate: ["cuisines"],
+      // populate: "*",
     },
 
     {
       encodeValuesOnly: true,
-      arrayFormat: "brackets",
+      // arrayFormat: "brackets", NEVER USE THIS
     }
   );
 
   try {
+    // const data = await qsToStrapi(`/reviews?${query}`);
     const data = await qsToStrapi(`/restaurants?${query}`);
     console.log(data);
 
@@ -76,6 +112,48 @@ export default async function handler(
 //         },
 //       },
 //     }
+
+// TEXT SEARCH - CHECK THE FULL QUERY
+
+// const query = qs.stringify(
+//   {
+//     sort: ["id:asc"],
+
+//     fields: [],
+
+//     filters: {
+//       $or: [
+//         {
+//           description: {
+//             $containsi: searchTerm,
+//           },
+//         },
+//         {
+//           name: {
+//             $containsi: searchTerm,
+//           },
+//         },
+//         {
+//           slug: {
+//             $containsi: searchTerm,
+//           },
+//         },
+//         {
+//           price: {
+//             $containsi: searchTerm,
+//           },
+//         },
+//       ],
+//     },
+
+//     populate: "*",
+//   },
+
+//   {
+//     encodeValuesOnly: true,
+//     // arrayFormat: "brackets", // NEVER USE THIS, QUERY WILL NOT WORK IF YOU DO
+//   }
+// );
 
 // BY RESTAURANT ID
 // const query = qs.stringify(

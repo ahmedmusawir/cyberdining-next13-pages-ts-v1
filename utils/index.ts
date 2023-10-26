@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import moment from "moment";
-import { StringifyOptions } from "querystring";
 
 export const getExcerpt = (content: string, wordLimit = 20) => {
   const words = content.split(/\s+/); // Split by whitespace
@@ -34,15 +33,11 @@ type NestedSearchField = {
   [key: string]: BasicFilter;
 };
 
-export const generateSearchFields = (searchTerm: string): SearchField[] => {
+export const generateSearchFields = (
+  searchTerm: string,
+  fields: string[]
+): SearchField[] => {
   const searchFields: SearchField[] = [];
-  const fields = [
-    "title",
-    "content",
-    "slug",
-    "categories.name",
-    "post_tags.name",
-  ];
 
   fields.forEach((field) => {
     if (!field.includes(".")) {
@@ -64,7 +59,7 @@ const BASE_URL = "http://127.0.0.1:1337/api";
 export const qsToStrapi = async (endpoint: string) => {
   const STRAPI_API_KEY = process.env.STRAPI_API_KEY;
 
-  console.log("api key", STRAPI_API_KEY);
+  // console.log("api key", STRAPI_API_KEY);
 
   const headers = {
     Authorization: `Bearer ${STRAPI_API_KEY}`,

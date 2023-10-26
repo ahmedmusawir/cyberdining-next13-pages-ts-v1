@@ -6,6 +6,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const searchTerm = "world";
+
   // Example usage:
   const query = qs.stringify(
     {
@@ -13,19 +15,37 @@ export default async function handler(
 
       fields: [],
 
-      filters: {},
+      filters: {
+        $or: [
+          {
+            content: {
+              $containsi: "Nihad",
+            },
+          },
+          {
+            stars: {
+              $containsi: 4.5,
+            },
+          },
+        ],
+      },
 
-      populate: "*",
+      // populate: {
+      //   restaurants: {
+      //     populate: ["photos", "location", "cuisines", "reviews"],
+      //   },
+      // },
     },
 
     {
       encodeValuesOnly: true,
-      arrayFormat: "brackets",
+      // arrayFormat: "brackets", NEVER USE THIS
     }
   );
 
   try {
-    const data = await qsToStrapi(`/restaurants?${query}`);
+    const data = await qsToStrapi(`/reviews?${query}`);
+    // const data = await qsToStrapi(`/restaurants?${query}`);
     console.log(data);
 
     res.status(200).json(data); // Send the actual data
@@ -252,17 +272,37 @@ export default async function handler(
 
 //       fields: [],
 
-//       filters: {
-//         $or: [
-//           {
-//             content: {
-//               $containsi: "Nihad",
-//             },
-//           },
-//           {
-//             content: {
-//               $containsi: "nimat",
-//             },
-//           },
-//         ],
-//       }
+// filters: {
+//   $or: [
+//     {
+//       content: {
+//         $containsi: "Nihad",
+//       },
+//     },
+//     {
+//       content: {
+//         $containsi: "nimat",
+//       },
+//     },
+//   ],
+// }
+
+// FILTER BY RELATED COLLECTION ID AND PULLING DEEP RELATIONS DATA
+// const query = qs.stringify(
+//   {
+//     sort: ["id:asc"],
+
+//     fields: [],
+
+//     filters: {
+//       id: {
+//         $eq: 6,
+//       },
+//     },
+
+//     populate: {
+//       restaurants: {
+//         populate: ["photos", "location", "cuisines", "reviews.user"],
+//       },
+//     },
+//   }

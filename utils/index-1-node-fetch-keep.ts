@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:1337/api";
 export const qsToStrapi = async (endpoint: string) => {
   const STRAPI_API_KEY = process.env.STRAPI_API_KEY;
 
-  console.log("api key", STRAPI_API_KEY);
+  // console.log("api key", STRAPI_API_KEY);
 
   const headers = {
     Authorization: `Bearer ${STRAPI_API_KEY}`,

@@ -2,10 +2,19 @@ import { RestaurantApiResponse } from "@/services/restaurantService";
 
 export interface RestaurantDataSource {
   getAllRestaurants: () => Promise<RestaurantApiResponse>;
-  // getPostSlugs: () => Promise<string[]>;
-  // getPostBySlug: (slug: string) => Promise<PostData>;
-  // getPostById: (postId: number) => Promise<PostData>;
-  // searchPosts: (query: FiltersState) => Promise<PostApiResponse>;
+  getAllRestaurantsByCuisineId: (
+    cuisineId: number
+  ) => Promise<RestaurantApiResponse>;
+  getAllRestaurantsByLocationId: (
+    locationId: number
+  ) => Promise<RestaurantApiResponse>;
+  getAllRestaurantsBySearchTerm: (
+    searchTerm: string
+  ) => Promise<RestaurantApiResponse>;
+  getRestaurantSlugs: () => Promise<string[]>;
+  getRestaurantBySlug: (slug: string) => Promise<RestaurantData>;
+  getRestaurantById: (postId: number) => Promise<RestaurantData>;
+  // searchRestaurants: (query: FiltersState) => Promise<PostApiResponse>;
 }
 
 export interface RestaurantData {
@@ -86,4 +95,23 @@ export interface Review {
   stars: number;
   createdAt: string;
   updatedAt: string;
+  user: UserData;
+}
+
+export interface UserData {
+  data: {
+    id: number;
+    attributes: User;
+  };
+}
+
+export interface User {
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  createdAt: string;
+  updatedAt: string;
+  profileImage: string;
 }

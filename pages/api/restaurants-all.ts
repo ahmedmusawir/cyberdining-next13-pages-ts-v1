@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import datasource from "../../data-layer/";
+import datasource from "../../data-layer";
 
 export default async function handler(
   req: NextApiRequest,
