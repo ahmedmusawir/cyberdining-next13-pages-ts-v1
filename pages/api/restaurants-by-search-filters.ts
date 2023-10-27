@@ -11,6 +11,8 @@ export default async function handler(
 ) {
   const searchFilterQuery: FiltersState = req.query as any;
 
+  console.log("SEARCH FILTER QUERY:", searchFilterQuery);
+
   if (!searchFilterQuery || Array.isArray(searchFilterQuery)) {
     res
       .status(400)

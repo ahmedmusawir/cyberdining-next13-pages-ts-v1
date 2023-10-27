@@ -1,5 +1,6 @@
 import React from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const posts = [
   {
@@ -52,7 +53,7 @@ const FeaturedRestaurants = () => {
         <div className="mx-auto max-w-2xl text-center">
           {/* <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"> */}
           <h2 className="text-3xl font-bold tracking-tight text-indigo-600 sm:text-4xl">
-            Featured Restaurants
+            Top Restaurants
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
             The top restaurants of the peach state Georgia
@@ -124,12 +125,13 @@ const FeaturedRestaurants = () => {
         </div>
         <hr className="mb-8" />
         <div className="mx-auto max-w-2xl text-center">
-          <button
+          <Link
+            href="/restaurants"
             type="button"
             className="rounded-full bg-red-700 px-10 py-4 text-sm font-semibold text-white shadow-sm hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
           >
             Show All
-          </button>
+          </Link>
         </div>
       </div>
     </div>

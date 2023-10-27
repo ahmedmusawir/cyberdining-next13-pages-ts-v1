@@ -1,8 +1,9 @@
 import { PostApiResponse } from "./services/postService";
+import { RestaurantApiResponse } from "./services/restaurantService";
 
-export interface RootState {
-  posts: PostsState;
-  postsFilters: FiltersState;
+export interface GlobalState {
+  restaurants: RestaurantState;
+  restaurantFilters: FiltersState;
   auth: AuthState;
 }
 
@@ -33,9 +34,8 @@ export interface FiltersState {
   hasOnlineOrderingButtonEnabled: boolean;
 }
 
-export interface PostsState {
-  posts: PostApiResponse;
-  status: "published" | "draft" | "review";
+export interface RestaurantState {
+  restaurants: RestaurantApiResponse;
 }
 
 export interface AxiosError {

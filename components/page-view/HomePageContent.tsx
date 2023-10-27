@@ -3,18 +3,9 @@ import FeaturedCities from "../ui-ux/FeaturedCities";
 import FeaturedCuisines from "../ui-ux/FeaturedCuisines";
 import FeaturedRestaurants from "../ui-ux/FeaturedRestaurants";
 
-interface Props {
-  // homePageContent: HomePageData;
-}
-
-// const HomeContent = ({ homePageContent }: Props) => {
-const HomeContent = () => {
-  // const title = homePageContent?.attributes?.heroTitle;
-  // const slogan = homePageContent?.attributes?.heroSlogan;
-
+const HomePageContent = () => {
   return (
     <Container FULL className="">
-      {/* <Hero title={title} slogan={slogan} /> */}
       <Hero />
       <Row>
         <FeaturedRestaurants />
@@ -29,4 +20,4 @@ const HomeContent = () => {
   );
 };
 
-export default HomeContent;
+export default HomePageContent;

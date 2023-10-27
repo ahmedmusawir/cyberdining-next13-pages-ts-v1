@@ -15,7 +15,6 @@ export const getAllRestaurants = async (): Promise<RestaurantApiResponse> => {
     },
     {
       encodeValuesOnly: true,
-      arrayFormat: "brackets",
     }
   );
 

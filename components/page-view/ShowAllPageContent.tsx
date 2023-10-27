@@ -1,26 +1,63 @@
-import Head from "next/head";
+import {
+  useGetRestaurantsQuery,
+  useLazyGetRestaurantsQuery,
+} from "@/features/restaurants/apiRestaurant";
+import { setRestaurants } from "@/features/restaurants/restaurantSlice";
+import { GlobalState } from "@/global-entities";
+import { RestaurantApiResponse } from "@/services/restaurantService";
 import { Dialog, Transition } from "@headlessui/react";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { XMarkIcon, ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
-import PageNotFoundContent from "./PageNotFoundContent";
-import NotFoundContent from "./NotFoundContent";
-import { Page } from "../globals";
-import { Row } from "../ui-ux";
-import SidebarNav from "../ui-ux/SidebarNav";
-import SidebarDesktop from "../ui-ux/SidebarDesktop";
-import SearchForm from "../forms/SearchForm";
+import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Head from "next/head";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import JobSortForm from "../forms/JobSortForm";
-import DataList from "../list-view/DataList";
+import SearchForm from "../forms/SearchForm";
+import { Page } from "../globals";
 import RestaurantList from "../list-view/RestaurantList";
+import SidebarDesktop from "../ui-ux/SidebarDesktop";
+import SidebarNav from "../ui-ux/SidebarNav";
 
-const JobsPageContent = () => {
-  return <JobBoard />;
-};
-
-const JobBoard = () => {
+const ShowAllPageContent = ({
+  initialRestaurants,
+}: {
+  initialRestaurants: RestaurantApiResponse;
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  //   const { jobs } = useJobs();
+  const dispatch = useDispatch();
+  const filters = useSelector((state: GlobalState) => state.restaurantFilters);
+
+  const {
+    data: restaurants,
+    error: restaurantError,
+    isLoading: restaurantIsLoading,
+  } = useGetRestaurantsQuery(filters);
+
+  const [getRestaurants, { data, error, isLoading }] =
+    useLazyGetRestaurantsQuery();
+  const initialMount = useRef(true);
+
+  // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(apiPosts.util.resetApiState());
+  //   };
+  // }, [dispatch]);
+
+  // KEEP THIS SHIT FOR TESTING. TO SEE THE ENTIRE STATE
+  // const entireState = useSelector((state: RootState) => state);
+  // console.log(entireState);
+
+  useEffect(() => {
+    dispatch(setRestaurants(initialRestaurants));
+  }, [initialRestaurants, dispatch]);
+
+  useEffect(() => {
+    if (initialMount.current) {
+      initialMount.current = false;
+    } else {
+      getRestaurants(filters);
+    }
+  }, [filters]);
 
   return (
     <>
@@ -101,7 +138,6 @@ const JobBoard = () => {
           </Transition.Root>
 
           {/* DESKTOP SIDEBAR */}
-          {/* <div className="bg-gray-900"> */}
           <div className="bg-gradient-to-r from-indigo-50 to-white">
             <SidebarDesktop />
           </div>
@@ -142,21 +178,15 @@ const JobBoard = () => {
               </div>
             </div>
 
-            {/* <main className="pb-10 min-h-full  border-8 border-green-500"> */}
             <main className="pb-10 min-h-full">
               <div className="">
                 {/* Your content */}
-
-                {/* <Row className="mx-auto"> */}
-                <RestaurantList />
-                {/* <DataList /> */}
-                {/* <h1 className="h1 text-center mb-5">Recent Jobs</h1> */}
-                {/* {jobs && jobs.data.length > 0 ? (
-                    <JobList jobs={jobs} />
-                  ) : (
-                    <NotFoundContent contentName="Jobs" />
-                  )} */}
-                {/* </Row> */}
+                {restaurants && (
+                  <RestaurantList
+                    title="All Restaurants..."
+                    restaurants={initialRestaurants}
+                  />
+                )}
               </div>
             </main>
           </div>
@@ -166,4 +196,4 @@ const JobBoard = () => {
   );
 };
 
-export default JobsPageContent;
+export default ShowAllPageContent;
