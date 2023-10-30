@@ -1,6 +1,23 @@
 import fetch from "node-fetch";
 import moment from "moment";
 
+// PROCESSING COMMA SEPERATED STRINGS INTO ARRAY FOR $in STRAPI FILTER
+export const convertStringToArray = (
+  queryData: string | string[]
+): string[] => {
+  let dataArray: string[] = [];
+
+  if (queryData) {
+    if (typeof queryData === "string") {
+      dataArray = (queryData as string).split(","); // Convert comma-separated string to array
+    } else {
+      dataArray = queryData as string[];
+    }
+  }
+
+  return dataArray;
+};
+
 export const getExcerpt = (content: string, wordLimit = 20) => {
   const words = content.split(/\s+/); // Split by whitespace
   return (

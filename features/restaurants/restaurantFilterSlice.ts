@@ -28,7 +28,7 @@ const restaurantFilterSlice = createSlice({
     toggleIsFeatured: (state) => {
       state.isFeatured = !state.isFeatured;
     },
-    togglehasOnlineOrdering: (state) => {
+    toggleHasOnlineOrdering: (state) => {
       state.hasOnlineOrdering = !state.hasOnlineOrdering;
     },
     setLocationIds: (state, action: PayloadAction<string[]>) => {
@@ -78,7 +78,7 @@ export const {
   setSearchTerm,
   setSortNameOrder,
   toggleIsFeatured,
-  togglehasOnlineOrdering,
+  toggleHasOnlineOrdering,
   setLocationIds,
   addLocationId,
   removeLocationId,

@@ -1,19 +1,36 @@
-// import { useJobs } from "@/contexts/JobContext";
+import {
+  setCurrentPage,
+  setSearchTerm,
+} from "@/features/restaurants/restaurantFilterSlice";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const SearchForm = () => {
-  //   const { searchFormState, setSearchFormState, setCurrentPage } = useJobs();
+  const dispatch = useDispatch();
+
+  const [inputValue, setInputValue] = useState(""); // Local state for input value
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Setting the current page number to 1
-    // setCurrentPage(1);
-    // Updating Search Form state w/ input text
-    // setSearchFormState(e.target.value);
+    setInputValue(e.target.value); // Update the local state
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (e.key === "Enter") {
+      dispatch(setCurrentPage(1));
+
+      dispatch(setSearchTerm(inputValue)); // Use the local state value
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent form submission
   };
 
   return (
-    <form className="relative flex flex-1" action="#" method="GET">
+    <form className="relative flex flex-1" onSubmit={handleSubmit}>
       <label htmlFor="search-field" className="sr-only">
         Search
       </label>
@@ -29,6 +46,7 @@ const SearchForm = () => {
         name="search"
         // value={searchFormState}
         onChange={(e) => handleSearch(e)}
+        onKeyUp={handleKeyPress}
       />
     </form>
   );

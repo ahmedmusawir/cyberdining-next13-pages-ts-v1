@@ -1,7 +1,7 @@
 import qs from "qs";
 import postService, { PostApiResponse } from "@/services/postService";
 import { FiltersState } from "@/global-entities";
-import { generateSearchFields } from "@/utils";
+import { convertStringToArray, generateSearchFields } from "@/utils";
 import restaurantService, {
   RestaurantApiResponse,
 } from "@/services/restaurantService";
@@ -220,6 +220,7 @@ export const getAllRestaurantsBySearchFilters = async (
 ): Promise<RestaurantApiResponse> => {
   let cuisineIdsArray: string[] = [];
   let locationIdsArray: string[] = [];
+  let pricesArray: string[] = [];
 
   // console.log("Current Page:", searchFilterQuery.currentPage);
   // console.log("Posts Per Page:", searchFilterQuery.postsPerPage);
@@ -228,22 +229,19 @@ export const getAllRestaurantsBySearchFilters = async (
   //   searchFilterQuery
   // );
 
-  // PROCESSING CATEGORY ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
+  // PROCESSING CUISINE ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
   if (searchFilterQuery.cuisineIds) {
-    if (typeof searchFilterQuery.cuisineIds === "string") {
-      cuisineIdsArray = (searchFilterQuery.cuisineIds as string).split(","); // Convert comma-separated string to array
-    } else {
-      cuisineIdsArray = searchFilterQuery.cuisineIds as string[];
-    }
+    cuisineIdsArray = convertStringToArray(searchFilterQuery.cuisineIds);
   }
-  // PROCESSING POST TAG ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
+  // PROCESSING LOCATION TAG ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
   if (searchFilterQuery.locationIds) {
-    if (typeof searchFilterQuery.locationIds === "string") {
-      locationIdsArray = (searchFilterQuery.locationIds as string).split(","); // Convert comma-separated string to array
-    } else {
-      locationIdsArray = searchFilterQuery.locationIds as string[];
-    }
+    locationIdsArray = convertStringToArray(searchFilterQuery.locationIds);
   }
+  // PROCESSING PRICE STRINGS INTO ARRAY FOR $in STRAPI FILTER
+  if (searchFilterQuery.prices) {
+    pricesArray = convertStringToArray(searchFilterQuery.prices);
+  }
+
   const fields = [
     "name",
     "description",
@@ -260,6 +258,8 @@ export const getAllRestaurantsBySearchFilters = async (
     : [];
 
   console.log("Prices in data layer", searchFilterQuery.prices);
+  console.log("Locations in data layer", searchFilterQuery.locationIds);
+  console.log("Search Term in data layer", searchFilterQuery.searchTerm);
 
   // Get search results:
   const query = qs.stringify(
@@ -281,9 +281,9 @@ export const getAllRestaurantsBySearchFilters = async (
             id: { $in: locationIdsArray.map((catId) => Number(catId)) }, // Converting id string to number
           },
         }),
-        ...(searchFilterQuery.prices && {
+        ...(pricesArray.length && {
           price: {
-            $in: searchFilterQuery.prices,
+            $in: pricesArray,
           },
         }),
 
@@ -295,7 +295,6 @@ export const getAllRestaurantsBySearchFilters = async (
 
     {
       encodeValuesOnly: true,
-      // arrayFormat: "brackets", //NEVER USE THIS
     }
   );
 

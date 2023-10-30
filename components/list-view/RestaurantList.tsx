@@ -47,10 +47,20 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                   </Link>
                 </div>
                 <div className="">
-                  <div className="flex items-center gap-x-4 text-xs">
-                    <span className="relative z-10 rounded-full bg-indigo-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
+                  <div className="flex justify-between items-center gap-x-4 text-xs">
+                    <span className="relative z-10 rounded-full bg-gray-500 px-3 py-1.5 font-medium text-white hover:bg-gray-100">
                       {restaurant.attributes.location.data?.attributes.name}
                     </span>
+                    <div>
+                      {restaurant.attributes.cuisines.data.map((cuisine) => (
+                        <span
+                          key={cuisine.id}
+                          className="relative z-10 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100"
+                        >
+                          {cuisine.attributes.name}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <div className="group relative max-w-xl">
                     <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
@@ -59,6 +69,13 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                         {restaurant.attributes.name}
                       </Link>
                     </h3>
+                    <p>{restaurant.attributes.price}</p>
+                    <p>{restaurant.attributes.isFeatured ? "Featured" : ""}</p>
+                    <p>
+                      {restaurant.attributes.hasOnlineOrdering
+                        ? "Order Online"
+                        : ""}
+                    </p>
                     <p className="mt-5 text-sm leading-6 text-gray-600">
                       {restaurant.attributes.description}
                     </p>

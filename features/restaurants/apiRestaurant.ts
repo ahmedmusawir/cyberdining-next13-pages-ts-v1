@@ -9,9 +9,9 @@ export const apiRestaurant = createApi({
   }),
   endpoints: (builder) => ({
     // The following sort function is not being used now
-    getRestaurantsByNameSort: builder.query<RestaurantApiResponse, string>({
-      query: (sortOrder) => `/restaurants-by-name-sort?sortOrder=${sortOrder}`,
-    }),
+    // getRestaurantsByNameSort: builder.query<RestaurantApiResponse, string>({
+    //   query: (sortOrder) => `/restaurants-by-name-sort?sortOrder=${sortOrder}`,
+    // }),
     // This function handles all the Search, Sort and Filtering
     getRestaurants: builder.query<RestaurantApiResponse, FiltersState>({
       query: (filters) => {
@@ -28,11 +28,11 @@ export const apiRestaurant = createApi({
         }
         // FEATURED RESTAURANTS
         if (filters.isFeatured) {
-          query += "isFeatured=true&";
+          query += `isFeatured=${filters.isFeatured}&`;
         }
         // HAS ONLINE ORDERING
         if (filters.hasOnlineOrdering) {
-          query += "hasOnlineOrdering=true&";
+          query += `hasOnlineOrdering=${filters.hasOnlineOrdering}&`;
         }
         // LOCATION IDS
         if (filters.locationIds?.length) {
@@ -44,7 +44,7 @@ export const apiRestaurant = createApi({
         }
         // PRICES
         if (filters.prices?.length) {
-          query += `cuisineIds=${filters.prices}&`;
+          query += `prices=${filters.prices}&`;
         }
 
         // PAGINATION PARAMS
@@ -60,5 +60,5 @@ export const apiRestaurant = createApi({
 export const {
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
-  useGetRestaurantsByNameSortQuery,
+  // useGetRestaurantsByNameSortQuery,
 } = apiRestaurant;

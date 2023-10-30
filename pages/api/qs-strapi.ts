@@ -14,9 +14,13 @@ export default async function handler(
       sort: ["name:desc"],
       // sort: ["name:asc"],
 
-      fields: ["name"],
+      fields: ["name", "price"],
 
-      filters: {},
+      filters: {
+        price: {
+          $in: ["CHEAP", "EXPENSIVE"],
+        },
+      },
 
       // populate: {
       //   restaurants: {

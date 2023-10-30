@@ -11,7 +11,7 @@ export default async function handler(
 ) {
   const searchFilterQuery: FiltersState = req.query as any;
 
-  console.log("SEARCH FILTER QUERY:", searchFilterQuery);
+  console.log("SEARCH FILTER QUERY IN NEXT API:", searchFilterQuery);
 
   if (!searchFilterQuery || Array.isArray(searchFilterQuery)) {
     res

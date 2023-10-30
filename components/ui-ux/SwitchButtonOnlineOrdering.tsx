@@ -3,6 +3,7 @@ import { Switch } from "@headlessui/react";
 import { useDispatch } from "react-redux";
 import {
   setCurrentPage,
+  toggleHasOnlineOrdering,
   toggleIsFeatured,
 } from "@/features/restaurants/restaurantFilterSlice";
 
@@ -23,7 +24,7 @@ const SwitchButtonOnlineOrdering = ({ labelText, filter }: SwitchProps) => {
     setEnabled(checked);
     dispatch(setCurrentPage(1));
 
-    dispatch(toggleIsFeatured()); // Dispatch the action to update the Redux state
+    dispatch(toggleHasOnlineOrdering()); // Dispatch the action to update the Redux state
   };
 
   return (
