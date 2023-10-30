@@ -3,58 +3,6 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Pagination from "./Pagination";
 
-const posts = [
-  {
-    id: 1,
-    title: "Cyberize Dining",
-    slug: "cyberize-dining",
-    description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-    imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554590/50980245_u9y9ro.webp",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { title: "Fine Dining", href: "#" },
-  },
-  {
-    id: 2,
-    title: "Moose is Loose",
-    slug: "moose-is-loose",
-    description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-    imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554590/51255426_zyfxwe.webp",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { title: "Asian", href: "#" },
-  },
-  {
-    id: 3,
-    title: "Star Bucks",
-    slug: "star-bucks",
-    description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-    imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693546208/cappuccino-croissant_bvzadp.webp",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { title: "Italian", href: "#" },
-  },
-  {
-    id: 4,
-    title: "Eat All You Can",
-    slug: "eat-all-you-can",
-    description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel iusto corrupti dicta laboris incididunt.",
-    imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550268/52663349_ssymlb.webp",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { title: "Chinese", href: "#" },
-  },
-  // More posts...
-];
-
 const review = 4;
 
 function classNames(...classes: string[]) {
@@ -69,7 +17,7 @@ interface Props {
 }
 
 const RestaurantList = ({ title, restaurants }: Props) => {
-  // console.log("Restaurant List", restaurants);
+  console.log("Restaurant List", restaurants);
   return (
     <div className="bg-white py-4 sm:py-4">
       {/* <div className="w-full border-8 border-orange-500"> */}
@@ -83,7 +31,7 @@ const RestaurantList = ({ title, restaurants }: Props) => {
           </p>
           {/* For screens below 2xl, maintain the current layout */}
           <div className="mt-16 space-y-20 lg:mt-12 lg:space-y-20 2xl:space-y-0 2xl:grid 2xl:grid-cols-2 2xl:gap-8">
-            {restaurants.data.map((restaurant) => (
+            {restaurants?.data.map((restaurant) => (
               <article
                 key={restaurant.id}
                 className="relative isolate flex flex-col gap-8 lg:flex-row px-5 md:px-10"
@@ -101,7 +49,7 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                 <div className="">
                   <div className="flex items-center gap-x-4 text-xs">
                     <span className="relative z-10 rounded-full bg-indigo-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">
-                      {restaurant.attributes.location.data.attributes.name}
+                      {restaurant.attributes.location.data?.attributes.name}
                     </span>
                   </div>
                   <div className="group relative max-w-xl">

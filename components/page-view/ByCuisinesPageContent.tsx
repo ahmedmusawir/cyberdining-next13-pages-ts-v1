@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { Fragment, useState } from "react";
-import JobSortForm from "../forms/JobSortForm";
+import JobSortForm from "../forms/NameSortForm";
 import SearchForm from "../forms/SearchForm";
 import { Page } from "../globals";
 import RestaurantList from "../list-view/RestaurantList";

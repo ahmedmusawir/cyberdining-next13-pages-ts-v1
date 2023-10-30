@@ -23,6 +23,26 @@ export const getAllRestaurants = async (): Promise<RestaurantApiResponse> => {
   return response;
 };
 
+// GETS ALL RESTAURANTS
+export const getAllRestaurantsByNameSort = async (
+  sortOrder: string
+): Promise<RestaurantApiResponse> => {
+  const query = qs.stringify(
+    {
+      sort: [`name:${sortOrder}`],
+
+      populate: "*",
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+
+  const response = await restaurantService.getAll(query);
+
+  return response;
+};
+
 // GETS ALL RESTAURANTS BY CUISINE ID
 export const getAllRestaurantsByCuisineId = async (
   cuisineId: number
@@ -203,10 +223,10 @@ export const getAllRestaurantsBySearchFilters = async (
 
   // console.log("Current Page:", searchFilterQuery.currentPage);
   // console.log("Posts Per Page:", searchFilterQuery.postsPerPage);
-  console.log(
-    "SEARCH FILTER QUERY IN RESTAURANTS IN DATA LAYER:",
-    searchFilterQuery
-  );
+  // console.log(
+  //   "SEARCH FILTER QUERY IN RESTAURANTS IN DATA LAYER:",
+  //   searchFilterQuery
+  // );
 
   // PROCESSING CATEGORY ID-S STRING INTO ARRAY FOR $in STRAPI FILTER
   if (searchFilterQuery.cuisineIds) {
@@ -239,10 +259,12 @@ export const getAllRestaurantsBySearchFilters = async (
     ? generateSearchFields(searchFilterQuery.searchTerm, fields)
     : [];
 
+  console.log("Prices in data layer", searchFilterQuery.prices);
+
   // Get search results:
   const query = qs.stringify(
     {
-      fields: ["name"],
+      sort: [`name:${searchFilterQuery.sortNameOrder}`],
 
       filters: {
         ...(searchFilterQuery.isFeatured && { isFeatured: { $eq: true } }),
@@ -259,16 +281,21 @@ export const getAllRestaurantsBySearchFilters = async (
             id: { $in: locationIdsArray.map((catId) => Number(catId)) }, // Converting id string to number
           },
         }),
+        ...(searchFilterQuery.prices && {
+          price: {
+            $in: searchFilterQuery.prices,
+          },
+        }),
+
         $or: searchFields,
       },
 
       populate: "*",
-      // populate: ["location, cuisines"],
     },
 
     {
       encodeValuesOnly: true,
-      // arrayFormat: "brackets", NEVER USE THIS
+      // arrayFormat: "brackets", //NEVER USE THIS
     }
   );
 

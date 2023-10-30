@@ -1,5 +1,4 @@
 import { FiltersState } from "@/global-entities";
-import { PostApiResponse } from "@/services/postService";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
@@ -9,6 +8,11 @@ export const apiRestaurant = createApi({
     baseUrl: "/api",
   }),
   endpoints: (builder) => ({
+    // The following sort function is not being used now
+    getRestaurantsByNameSort: builder.query<RestaurantApiResponse, string>({
+      query: (sortOrder) => `/restaurants-by-name-sort?sortOrder=${sortOrder}`,
+    }),
+    // This function handles all the Search, Sort and Filtering
     getRestaurants: builder.query<RestaurantApiResponse, FiltersState>({
       query: (filters) => {
         // Constructing the query based on the filters
@@ -17,6 +21,10 @@ export const apiRestaurant = createApi({
         // SEARCH TERM
         if (filters.searchTerm) {
           query += `searchTerm=${filters.searchTerm}&`;
+        }
+        // SORT NAME ORDER
+        if (filters.sortNameOrder) {
+          query += `sortNameOrder=${filters.sortNameOrder}&`;
         }
         // FEATURED RESTAURANTS
         if (filters.isFeatured) {
@@ -34,6 +42,11 @@ export const apiRestaurant = createApi({
         if (filters.cuisineIds?.length) {
           query += `cuisineIds=${filters.cuisineIds}&`;
         }
+        // PRICES
+        if (filters.prices?.length) {
+          query += `cuisineIds=${filters.prices}&`;
+        }
+
         // PAGINATION PARAMS
         query += `currentPage=${filters.currentPage}&postsPerPage=${filters.restaurantsPerPage}&`;
 
@@ -44,5 +57,8 @@ export const apiRestaurant = createApi({
   }),
 });
 
-export const { useGetRestaurantsQuery, useLazyGetRestaurantsQuery } =
-  apiRestaurant;
+export const {
+  useGetRestaurantsQuery,
+  useLazyGetRestaurantsQuery,
+  useGetRestaurantsByNameSortQuery,
+} = apiRestaurant;

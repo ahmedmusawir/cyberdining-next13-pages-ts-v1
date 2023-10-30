@@ -3,8 +3,10 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: FiltersState = {
   searchTerm: "",
+  sortNameOrder: "asc",
   cuisineIds: [],
   locationIds: [],
+  prices: [],
   currentPage: 1,
   restaurantsPerPage: 4,
   isFeatured: false,
@@ -20,6 +22,9 @@ const restaurantFilterSlice = createSlice({
     setSearchTerm: (state, action: PayloadAction<string>) => {
       state.searchTerm = action.payload;
     },
+    setSortNameOrder: (state, action: PayloadAction<string>) => {
+      state.sortNameOrder = action.payload;
+    },
     toggleIsFeatured: (state) => {
       state.isFeatured = !state.isFeatured;
     },
@@ -32,7 +37,7 @@ const restaurantFilterSlice = createSlice({
     addLocationId: (state, action: PayloadAction<string>) => {
       state.locationIds?.push(action.payload);
     },
-    removeLoctionId: (state, action: PayloadAction<string>) => {
+    removeLocationId: (state, action: PayloadAction<string>) => {
       state.locationIds = state.locationIds?.filter(
         (term) => term !== action.payload
       );
@@ -48,11 +53,18 @@ const restaurantFilterSlice = createSlice({
         (term) => term !== action.payload
       );
     },
+    addPrice: (state, action: PayloadAction<string>) => {
+      state.prices?.push(action.payload);
+    },
+    removePrice: (state, action: PayloadAction<string>) => {
+      state.prices = state.prices?.filter((term) => term !== action.payload);
+    },
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
     resetAll: (state) => {
       state.searchTerm = "";
+      state.sortNameOrder = "";
       state.locationIds = [];
       state.cuisineIds = [];
       state.isFeatured = false;
@@ -64,14 +76,17 @@ const restaurantFilterSlice = createSlice({
 
 export const {
   setSearchTerm,
+  setSortNameOrder,
   toggleIsFeatured,
   togglehasOnlineOrdering,
   setLocationIds,
   addLocationId,
-  removeLoctionId,
+  removeLocationId,
   setCuisineIds,
   addCuisineId,
   removeCuisineId,
+  addPrice,
+  removePrice,
   setCurrentPage,
   resetAll,
 } = restaurantFilterSlice.actions;

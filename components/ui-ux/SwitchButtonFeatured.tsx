@@ -15,7 +15,7 @@ interface SwitchProps {
   filter: string;
 }
 
-const SwitchButton = ({ labelText, filter }: SwitchProps) => {
+const SwitchButtonFeatured = ({ labelText, filter }: SwitchProps) => {
   const [enabled, setEnabled] = useState(false);
   const dispatch = useDispatch();
 
@@ -54,4 +54,4 @@ const SwitchButton = ({ labelText, filter }: SwitchProps) => {
   );
 };
 
-export default SwitchButton;
+export default SwitchButtonFeatured;

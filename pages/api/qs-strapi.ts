@@ -11,24 +11,12 @@ export default async function handler(
   // Example usage:
   const query = qs.stringify(
     {
-      sort: ["id:asc"],
+      sort: ["name:desc"],
+      // sort: ["name:asc"],
 
-      fields: [],
+      fields: ["name"],
 
-      filters: {
-        $or: [
-          {
-            content: {
-              $containsi: "Nihad",
-            },
-          },
-          {
-            stars: {
-              $containsi: 4.5,
-            },
-          },
-        ],
-      },
+      filters: {},
 
       // populate: {
       //   restaurants: {
@@ -44,8 +32,8 @@ export default async function handler(
   );
 
   try {
-    const data = await qsToStrapi(`/reviews?${query}`);
-    // const data = await qsToStrapi(`/restaurants?${query}`);
+    // const data = await qsToStrapi(`/reviews?${query}`);
+    const data = await qsToStrapi(`/restaurants?${query}`);
     console.log(data);
 
     res.status(200).json(data); // Send the actual data

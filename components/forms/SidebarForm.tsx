@@ -1,7 +1,9 @@
 import React from "react";
-import SwitchButton from "../ui-ux/SwitchButton";
-import CheckboxGroupJobTypes from "../ui-ux/CheckboxGroupJobTypes";
-import CheckboxGroupSalary from "../ui-ux/CheckboxGroupSalary";
+import SwitchButtonFeatured from "../ui-ux/SwitchButtonFeatured";
+import SwitchButtonOnlineOrdering from "../ui-ux/SwitchButtonOnlineOrdering";
+import CheckboxGroupCuisines from "../ui-ux/CheckboxGroupCuisines";
+import CheckboxGroupLocations from "../ui-ux/CheckboxGroupLocations";
+import CheckboxGroupPrice from "../ui-ux/CheckboxGroupPrice";
 
 const SidebarForm = () => {
   return (
@@ -9,16 +11,20 @@ const SidebarForm = () => {
       <div className="text-sm font-semibold leading-6 text-gray-400 pb-5">
         Filter Results
       </div>
-      {/* <SwitchButton labelText="Remote Only" filter="remoteOk" /> */}
-      <SwitchButton labelText="Featured Only" filter="featured" />
+      <SwitchButtonFeatured labelText="Featured Only" filter="featured" />
+      <SwitchButtonOnlineOrdering labelText="Order Online" filter="featured" />
       <div className="text-sm font-semibold leading-6 text-gray-400 py-5">
         Cuisines
       </div>
-      <CheckboxGroupJobTypes />
+      <CheckboxGroupCuisines />
       <div className="text-sm font-semibold leading-6 text-gray-400 py-5">
         Locations
       </div>
-      <CheckboxGroupSalary />
+      <CheckboxGroupLocations />
+      <div className="text-sm font-semibold leading-6 text-gray-400 py-5">
+        Price (Table for 2)
+      </div>
+      <CheckboxGroupPrice />
     </div>
   );
 };

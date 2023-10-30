@@ -1,4 +1,3 @@
-import { PostApiResponse } from "./services/postService";
 import { RestaurantApiResponse } from "./services/restaurantService";
 
 export interface GlobalState {
@@ -24,10 +23,12 @@ export interface AuthState {
 
 export interface FiltersState {
   searchTerm?: string;
+  sortNameOrder?: string;
   isFeatured?: boolean;
   hasOnlineOrdering?: boolean;
   cuisineIds: string[];
   locationIds: string[];
+  prices: string[];
   currentPage: number;
   restaurantsPerPage: number;
   isFeaturedButtonEnabled: boolean;
