@@ -1,7 +1,5 @@
 import {
-  addLocationId,
   addPrice,
-  removeLocationId,
   removePrice,
   setCurrentPage,
 } from "@/features/restaurants/restaurantFilterSlice";
@@ -14,7 +12,7 @@ const CheckboxGroupPrice = () => {
   const priceTerms = useSelector(
     (state: GlobalState) => state.restaurantFilters.prices
   );
-  console.log("Prices in form", priceTerms);
+  // console.log("Prices in form", priceTerms);
 
   const priceOptions = [
     { value: "CHEAP", display: "Below $30 ($)" },

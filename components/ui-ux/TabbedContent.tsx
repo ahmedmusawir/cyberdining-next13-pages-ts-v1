@@ -22,7 +22,9 @@ const TabbedContent = ({ restaurant }: Props) => {
   const restaurantName = restaurant.attributes.name;
   const restaurantDescription = restaurant.attributes.description;
   const restaurantPhotos = restaurant.attributes.photos;
+  const restaurantMenu = restaurant.attributes.menuItems;
   const totalReviews = restaurant.attributes.reviews.data.length;
+  const onlineOrdreing = restaurant.attributes.hasOnlineOrdering;
 
   return (
     <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
@@ -71,7 +73,7 @@ const TabbedContent = ({ restaurant }: Props) => {
                         </span>
                       ))}
                   </div>
-                  <span className="relative z-1 rounded-full bg-gray-600 px-3 py-1.5 font-medium text-white hover:bg-gray-100 mt-8">
+                  <span className="relative z-1 rounded-full bg-gray-600 px-3 py-1.5 font-medium text-white  mt-8">
                     {location}
                   </span>
                 </section>
@@ -123,7 +125,10 @@ const TabbedContent = ({ restaurant }: Props) => {
           <Tab.Panel className="pt-10">
             <h3 className="sr-only">Menu</h3>
 
-            <MenuList />
+            <MenuList
+              restaurantMenu={restaurantMenu}
+              onlineOrdreing={onlineOrdreing}
+            />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

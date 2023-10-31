@@ -18,7 +18,7 @@ interface Props {
 }
 
 const RestaurantSingleContent = ({ restaurant }: Props) => {
-  console.log("Restaurant Single Page Content Data", restaurant);
+  // console.log("Restaurant Single Page Content Data", restaurant);
   return (
     <>
       <Head>
