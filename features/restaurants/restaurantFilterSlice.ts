@@ -62,14 +62,24 @@ const restaurantFilterSlice = createSlice({
     setCurrentPage: (state, action: PayloadAction<number>) => {
       state.currentPage = action.payload;
     },
+    setIsFeaturedButtonEnabled: (state) => {
+      state.isFeaturedButtonEnabled = !state.isFeaturedButtonEnabled;
+    },
+    setHasOnlineOrderingButtonEnabled: (state) => {
+      state.hasOnlineOrderingButtonEnabled =
+        !state.hasOnlineOrderingButtonEnabled;
+    },
     resetAll: (state) => {
       state.searchTerm = "";
-      state.sortNameOrder = "";
+      state.sortNameOrder = "asc";
       state.locationIds = [];
       state.cuisineIds = [];
+      state.prices = [];
       state.isFeatured = false;
       state.hasOnlineOrdering = false;
       state.currentPage = 1;
+      state.isFeaturedButtonEnabled = false;
+      state.hasOnlineOrderingButtonEnabled = false;
     },
   },
 });
@@ -88,6 +98,8 @@ export const {
   addPrice,
   removePrice,
   setCurrentPage,
+  setIsFeaturedButtonEnabled,
+  setHasOnlineOrderingButtonEnabled,
   resetAll,
 } = restaurantFilterSlice.actions;
 export default restaurantFilterSlice.reducer;

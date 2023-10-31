@@ -6,55 +6,24 @@ import {
 import { Tab } from "@headlessui/react";
 import ImageList from "../list-view/ImageList";
 import MenuList from "../list-view/MenuList";
-
-const faqs = [
-  {
-    question: "What format are these icons?",
-    answer:
-      "The icons are in SVG (Scalable Vector Graphic) format. They can be imported into your design tool of choice and used directly in code.",
-  },
-  {
-    question: "Can I use the icons at different sizes?",
-    answer:
-      "Yes. The icons are drawn on a 24 x 24 pixel grid, but the icons can be scaled to different sizes as needed. We don't recommend going smaller than 20 x 20 or larger than 64 x 64 to retain legibility and visual balance.",
-  },
-  // More FAQs...
-];
-const license = {
-  href: "#",
-  summary:
-    "For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.",
-  content: `
-    <h4>Overview</h4>
-    
-    <p>For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.</p>
-    
-    <ul role="list">
-    <li>You\'re allowed to use the icons in unlimited projects.</li>
-    <li>Attribution is not required to use the icons.</li>
-    </ul>
-    
-    <h4>What you can do with it</h4>
-    
-    <ul role="list">
-    <li>Use them freely in your personal and professional work.</li>
-    <li>Make them your own. Change the colors to suit your project or brand.</li>
-    </ul>
-    
-    <h4>What you can\'t do with it</h4>
-    
-    <ul role="list">
-    <li>Don\'t be greedy. Selling or distributing these icons in their original or modified state is prohibited.</li>
-    <li>Don\'t be evil. These icons cannot be used on websites or applications that promote illegal or immoral beliefs or activities.</li>
-    </ul>
-  `,
-};
+import { RestaurantData } from "@/data-layer/restaurant-entities";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const TabbedContent = () => {
+interface Props {
+  restaurant: RestaurantData;
+}
+
+const TabbedContent = ({ restaurant }: Props) => {
+  const cuisinesArray = restaurant.attributes.cuisines.data;
+  const location = restaurant.attributes.location.data.attributes.name;
+  const restaurantName = restaurant.attributes.name;
+  const restaurantDescription = restaurant.attributes.description;
+  const restaurantPhotos = restaurant.attributes.photos;
+  const totalReviews = restaurant.attributes.reviews.data.length;
+
   return (
     <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
       <Tab.Group as="div">
@@ -84,18 +53,6 @@ const TabbedContent = () => {
             >
               Menu
             </Tab>
-            {/* <Tab
-              className={({ selected }) =>
-                classNames(
-                  selected
-                    ? "border-indigo-600 text-indigo-600"
-                    : "border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800",
-                  "whitespace-nowrap border-b-2 py-6 text-sm font-medium"
-                )
-              }
-            >
-              License
-            </Tab> */}
           </Tab.List>
         </div>
         <Tab.Panels as={Fragment}>
@@ -103,24 +60,24 @@ const TabbedContent = () => {
             <h3 className="sr-only">Overview</h3>
 
             <article className="flex flex-col items-start justify-between">
+              {/*  This div is keeping the photos block intact */}
               <div className="">
-                <div className="mt-8 flex items-center gap-x-4 text-xs">
-                  <a
-                    href="#"
-                    className="relative z-10 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-800 hover:bg-gray-100"
-                  >
-                    Fine Dining
-                  </a>
-                  <a
-                    href="#"
-                    className="relative z-10 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-800 hover:bg-gray-100"
-                  >
-                    Bar / Lounge
-                  </a>
-                </div>
+                <section className="flex justify-between">
+                  <div className="mt-8 flex items-center gap-x-4 text-xs">
+                    {cuisinesArray.length &&
+                      cuisinesArray.map((cuisine) => (
+                        <span className="relative z-1 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-800 hover:bg-gray-100">
+                          {cuisine.attributes.name}
+                        </span>
+                      ))}
+                  </div>
+                  <span className="relative z-1 rounded-full bg-gray-600 px-3 py-1.5 font-medium text-white hover:bg-gray-100 mt-8">
+                    {location}
+                  </span>
+                </section>
                 <div className="group relative">
                   <h1 className="mt-3 font-semibold leading-6 text-gray-900 group-hover:text-gray-600 py-5">
-                    Grand Hyatt Kuala Lumpur
+                    {restaurantName}
                   </h1>
                   <hr className="" />
                   <div className="mt-8 items-center gap-x-4 flex  justify-between pb-10">
@@ -143,25 +100,20 @@ const TabbedContent = () => {
                     </div>
                     <div className="flex justify-start">
                       <ChatBubbleBottomCenterTextIcon className="w-6 text-indigo-500 mr-3" />{" "}
-                      123 Reviews
+                      {totalReviews} Reviews
                     </div>
                   </div>
 
                   {/* <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600"> */}
                   <p className="text-sm leading-6 text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minima debitis a blanditiis eveniet dolore quidem aperiam
-                    laboriosam inventore magni neque aspernatur adipisci sunt
-                    dolores deserunt, perferendis veritatis velit maiores vitae?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Minima debitis a blanditiis eveniet dolore quidem aperiam
+                    {restaurantDescription}
                   </p>
                 </div>
                 <div className="mt-8 items-center  pb-12">
                   <div className="items-center">
                     <h4>Photos</h4>
                     <hr />
-                    <ImageList />
+                    <ImageList photos={restaurantPhotos} />
                   </div>
                 </div>
               </div>

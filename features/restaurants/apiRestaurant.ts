@@ -48,7 +48,7 @@ export const apiRestaurant = createApi({
         }
 
         // PAGINATION PARAMS
-        query += `currentPage=${filters.currentPage}&postsPerPage=${filters.restaurantsPerPage}&`;
+        query += `currentPage=${filters.currentPage}&restaurantsPerPage=${filters.restaurantsPerPage}&`;
 
         return query;
       },

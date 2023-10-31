@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentPage,
+  setIsFeaturedButtonEnabled,
   toggleIsFeatured,
 } from "@/features/restaurants/restaurantFilterSlice";
+import { GlobalState } from "@/global-entities";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,11 +18,14 @@ interface SwitchProps {
 }
 
 const SwitchButtonFeatured = ({ labelText, filter }: SwitchProps) => {
-  const [enabled, setEnabled] = useState(false);
+  // const [enabled, setEnabled] = useState(false);
   const dispatch = useDispatch();
+  const enabled = useSelector(
+    (state: GlobalState) => state.restaurantFilters.isFeaturedButtonEnabled
+  );
 
   const handleChange = (checked: boolean) => {
-    setEnabled(checked);
+    dispatch(setIsFeaturedButtonEnabled());
     dispatch(setCurrentPage(1));
 
     dispatch(toggleIsFeatured()); // Dispatch the action to update the Redux state

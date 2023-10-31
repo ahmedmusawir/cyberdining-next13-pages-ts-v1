@@ -10,16 +10,17 @@ interface PaginationProps {
 
 const Pagination = ({
   currentPage,
+  //   totalPageCount,
   onPageChange,
   pageSize,
   totalItemCount,
 }: PaginationProps) => {
-  // const totalPageCount = 5;
-  const totalPageCount = Math.ceil(totalItemCount / pageSize);
+  const totalPageCount = 5;
   const canGoPrevious = currentPage > 1;
   const canGoNext = currentPage < totalPageCount;
   const startingItemNumber = (currentPage - 1) * pageSize + 1;
   const endingItemNumber = Math.min(currentPage * pageSize, totalItemCount);
+  // <-- Change this to ensure we don't exceed the total count
 
   return (
     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-5">

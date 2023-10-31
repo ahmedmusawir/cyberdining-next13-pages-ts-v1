@@ -40,7 +40,7 @@ const SearchForm = () => {
       />
       <input
         id="search-field"
-        className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+        className="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm focus:outline-none"
         placeholder="Search..."
         type="search"
         name="search"

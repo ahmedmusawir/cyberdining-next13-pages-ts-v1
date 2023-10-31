@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setCurrentPage,
+  setHasOnlineOrderingButtonEnabled,
   toggleHasOnlineOrdering,
-  toggleIsFeatured,
 } from "@/features/restaurants/restaurantFilterSlice";
+import { GlobalState } from "@/global-entities";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,11 +18,15 @@ interface SwitchProps {
 }
 
 const SwitchButtonOnlineOrdering = ({ labelText, filter }: SwitchProps) => {
-  const [enabled, setEnabled] = useState(false);
+  // const [enabled, setEnabled] = useState(false);
   const dispatch = useDispatch();
+  const enabled = useSelector(
+    (state: GlobalState) =>
+      state.restaurantFilters.hasOnlineOrderingButtonEnabled
+  );
 
   const handleChange = (checked: boolean) => {
-    setEnabled(checked);
+    dispatch(setHasOnlineOrderingButtonEnabled());
     dispatch(setCurrentPage(1));
 
     dispatch(toggleHasOnlineOrdering()); // Dispatch the action to update the Redux state

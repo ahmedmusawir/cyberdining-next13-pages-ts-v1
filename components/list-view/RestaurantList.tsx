@@ -1,6 +1,14 @@
+import { setCurrentPage } from "@/features/restaurants/restaurantFilterSlice";
+import { GlobalState } from "@/global-entities";
 import { RestaurantApiResponse } from "@/services/restaurantService";
+import { generatePriceIcons } from "@/utils";
+import {
+  CurrencyDollarIcon,
+  CursorArrowRaysIcon,
+} from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
 
 const review = 4;
@@ -9,15 +17,30 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const onPageChange = () => {};
-
 interface Props {
   title: string;
   restaurants: RestaurantApiResponse;
 }
 
 const RestaurantList = ({ title, restaurants }: Props) => {
-  console.log("Restaurant List", restaurants);
+  // console.log("Restaurant List", restaurants);
+  const dispatch = useDispatch();
+  const currentPage = useSelector(
+    (state: GlobalState) => state.restaurantFilters.currentPage
+  );
+  const restaurantsPerPage = useSelector(
+    (state: GlobalState) => state.restaurantFilters.restaurantsPerPage
+  );
+
+  // console.log("CURRENT PAGE IN BLOGPOSTLIST", currentPage);
+  // console.log("POST PER PAGE IN BLOGPOSTLIST", postsPerPage);
+
+  const onPageChange = (newPage: number) => {
+    window.scrollTo(0, 0);
+
+    dispatch(setCurrentPage(newPage));
+    // TODO: Re-fetch data for the new page
+  };
   return (
     <div className="bg-white py-4 sm:py-4">
       {/* <div className="w-full border-8 border-orange-500"> */}
@@ -48,7 +71,7 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                 </div>
                 <div className="">
                   <div className="flex justify-between items-center gap-x-4 text-xs">
-                    <span className="relative z-10 rounded-full bg-gray-500 px-3 py-1.5 font-medium text-white hover:bg-gray-100">
+                    <span className="relative z-10 rounded-full bg-gray-500 px-3 py-1.5 font-medium text-white">
                       {restaurant.attributes.location.data?.attributes.name}
                     </span>
                     <div>
@@ -69,18 +92,31 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                         {restaurant.attributes.name}
                       </Link>
                     </h3>
-                    <p>{restaurant.attributes.price}</p>
-                    <p>{restaurant.attributes.isFeatured ? "Featured" : ""}</p>
-                    <p>
-                      {restaurant.attributes.hasOnlineOrdering
-                        ? "Order Online"
-                        : ""}
+                    <p className="flex justify-between">
+                      {/* $ ICONS FOR DIFFERENT PRICE POINTS */}
+                      {generatePriceIcons(restaurant.attributes.price)}
+                      {/* FOR FEATURED RESTAURANTS */}
+                      {restaurant.attributes.isFeatured ? (
+                        <span className="relative z-10 rounded-full bg-red-800 px-3 py-1.5 text-xs text-white hover:bg-gray-100">
+                          Featured
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </p>
                     <p className="mt-5 text-sm leading-6 text-gray-600">
                       {restaurant.attributes.description}
                     </p>
                   </div>
-                  <div className="mt-6 border-t border-gray-900/5 pt-6">
+                  {restaurant.attributes.hasOnlineOrdering ? (
+                    <span className="text-xs flex -ml-2  pt-5">
+                      <CursorArrowRaysIcon className="h-6 w-6 text-gray-500" />{" "}
+                      <span className="mt-[.4rem] ml-1">Order Online</span>
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                  <div className="mt-6 border-t border-gray-900/5">
                     <div className="relative flex items-center gap-x-4 justify-between">
                       <div className="flex items-center">
                         {[0, 1, 2, 3, 4].map((rating) => (
@@ -98,7 +134,7 @@ const RestaurantList = ({ title, restaurants }: Props) => {
                       </div>
                       <button
                         type="button"
-                        className="rounded-full bg-red-600 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                        className="rounded-full bg-red-600 px-5 py-2 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 mt-2"
                       >
                         Book Now
                       </button>
@@ -108,12 +144,15 @@ const RestaurantList = ({ title, restaurants }: Props) => {
               </article>
             ))}
           </div>
+
           <Pagination
-            currentPage={1}
-            totalPageCount={5}
+            currentPage={currentPage}
+            totalPageCount={Math.ceil(
+              restaurants?.meta?.pagination?.total / restaurantsPerPage
+            )}
             onPageChange={onPageChange}
-            pageSize={4}
-            totalItemCount={10}
+            pageSize={restaurantsPerPage}
+            totalItemCount={restaurants?.meta?.pagination?.total}
           />
         </div>
       </div>

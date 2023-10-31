@@ -44,9 +44,9 @@ const CheckboxGroupPostTags = () => {
           <div key={option.value} className="relative flex items-start">
             <div className="flex h-6 items-center">
               <input
-                id={option.value}
+                id={option.display}
                 aria-describedby="jobtype-checkbox-description"
-                name="jobtype-checkbox"
+                name="location-checkbox"
                 type="checkbox"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                 onChange={handlePostTagsSelect}
@@ -56,7 +56,7 @@ const CheckboxGroupPostTags = () => {
             </div>
             <div className="ml-3 text-sm leading-6">
               <label
-                htmlFor={option.value}
+                htmlFor={option.display}
                 className="text-xs font-semibold leading-6 text-gray-400"
               >
                 {option.display}

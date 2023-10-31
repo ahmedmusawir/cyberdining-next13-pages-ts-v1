@@ -1,5 +1,5 @@
-import fetch from "node-fetch";
 import moment from "moment";
+import { CurrencyDollarIcon } from "@heroicons/react/24/solid"; // Make sure to import the icon from the correct library
 
 // PROCESSING COMMA SEPERATED STRINGS INTO ARRAY FOR $in STRAPI FILTER
 export const convertStringToArray = (
@@ -18,6 +18,7 @@ export const convertStringToArray = (
   return dataArray;
 };
 
+// LIMITING POST EXCERPT SIZE
 export const getExcerpt = (content: string, wordLimit = 20) => {
   const words = content.split(/\s+/); // Split by whitespace
   return (
@@ -26,6 +27,7 @@ export const getExcerpt = (content: string, wordLimit = 20) => {
   );
 };
 
+// DATE FORMATTER
 export const formatDate = (strapiDate: string) => {
   // const strapiDate = "2023-10-02T11:17:15.676Z";
   const formattedDate = moment(strapiDate).format("MMM D, YYYY");
@@ -34,6 +36,7 @@ export const formatDate = (strapiDate: string) => {
   return formattedDate;
 };
 
+// PROCESSING SEARCH FIELDS FOR STRAPI API
 type BasicFilter = {
   $containsi?: string;
   $eq?: boolean | string;
@@ -71,6 +74,41 @@ export const generateSearchFields = (
   return searchFields;
 };
 
+// FOR GENERETING PRICE $$$ ICONS IN
+// components/list-view/RestaurantList.tsx
+export const generatePriceIcons = (price: string) => {
+  switch (price) {
+    case "EXPENSIVE":
+      return (
+        <span className="text-xs flex">
+          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5" />
+          {/* <span className="mt-[.4rem] ml-1">Price</span> */}
+        </span>
+      );
+    case "REGULAR":
+      return (
+        <span className="text-xs flex">
+          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5" />
+          {/* <span className="mt-[.4rem] ml-1">Price</span> */}
+        </span>
+      );
+    case "CHEAP":
+      return (
+        <span className="text-xs flex">
+          <CurrencyDollarIcon className="w-5" />
+          {/* <span className="mt-[.4rem] ml-1">Price</span> */}
+        </span>
+      );
+    default:
+      return null; // Return null for the default case, which won't render anything
+  }
+};
+
+// FUNCTION FOR TESTING STRAPI QUERY VIA NEXT API (LOCAL)
+// Location: /pages/api/qs-strapi.ts
 const BASE_URL = "http://127.0.0.1:1337/api";
 
 export const qsToStrapi = async (endpoint: string) => {

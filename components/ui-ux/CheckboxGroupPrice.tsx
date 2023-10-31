@@ -17,14 +17,14 @@ const CheckboxGroupPrice = () => {
   console.log("Prices in form", priceTerms);
 
   const priceOptions = [
-    { value: "CHEAP", display: "Below $30" },
+    { value: "CHEAP", display: "Below $30 ($)" },
     {
       value: "REGULAR",
-      display: "Below $60",
+      display: "Below $60 ($$)",
     },
     {
       value: "EXPENSIVE",
-      display: "$60 Plus",
+      display: "$60 Plus ($$$)",
     },
   ];
 

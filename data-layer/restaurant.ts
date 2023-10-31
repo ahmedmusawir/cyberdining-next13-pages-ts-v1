@@ -291,6 +291,12 @@ export const getAllRestaurantsBySearchFilters = async (
       },
 
       populate: "*",
+
+      // Add pagination parameters
+      "pagination[start]":
+        (searchFilterQuery.currentPage - 1) *
+        searchFilterQuery.restaurantsPerPage,
+      "pagination[limit]": searchFilterQuery.restaurantsPerPage,
     },
 
     {
