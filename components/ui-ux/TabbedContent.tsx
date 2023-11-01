@@ -1,12 +1,12 @@
 import { Fragment } from "react";
-import {
-  StarIcon,
-  ChatBubbleBottomCenterTextIcon,
-} from "@heroicons/react/20/solid";
+import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/20/solid";
 import { Tab } from "@headlessui/react";
 import ImageList from "../list-view/ImageList";
 import MenuList from "../list-view/MenuList";
 import { RestaurantData } from "@/data-layer/restaurant-entities";
+import { useRouter } from "next/router";
+import { calculateReviewRatingAverage } from "@/utils";
+import Stars from "./Stars";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,6 +17,7 @@ interface Props {
 }
 
 const TabbedContent = ({ restaurant }: Props) => {
+  const router = useRouter();
   const cuisinesArray = restaurant.attributes.cuisines.data;
   const location = restaurant.attributes.location.data.attributes.name;
   const restaurantName = restaurant.attributes.name;
@@ -25,9 +26,19 @@ const TabbedContent = ({ restaurant }: Props) => {
   const restaurantMenu = restaurant.attributes.menuItems;
   const totalReviews = restaurant.attributes.reviews.data.length;
   const onlineOrdreing = restaurant.attributes.hasOnlineOrdering;
+  const isFeatured = restaurant.attributes.isFeatured;
+  const avgRating = calculateReviewRatingAverage(
+    restaurant.attributes.reviews.data
+  );
 
   return (
     <div className="mx-auto mt-16 w-full max-w-2xl lg:col-span-4 lg:mt-0 lg:max-w-none">
+      <button
+        className="btn btn-xs float-right capitalize"
+        onClick={() => router.back()}
+      >
+        Go Back
+      </button>
       <Tab.Group as="div">
         <div className="border-b border-gray-200">
           <Tab.List className="-mb-px flex space-x-8">
@@ -37,7 +48,7 @@ const TabbedContent = ({ restaurant }: Props) => {
                   selected
                     ? "border-indigo-600 text-indigo-600"
                     : "border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800",
-                  "whitespace-nowrap border-b-2 py-6 text-sm font-medium"
+                  "whitespace-nowrap border-b-2 py-6 text-sm font-medium outline-none"
                 )
               }
             >
@@ -49,7 +60,7 @@ const TabbedContent = ({ restaurant }: Props) => {
                   selected
                     ? "border-indigo-600 text-indigo-600"
                     : "border-transparent text-gray-700 hover:border-gray-300 hover:text-gray-800",
-                  "whitespace-nowrap border-b-2 py-6 text-sm font-medium"
+                  "whitespace-nowrap border-b-2 py-6 text-sm font-medium outline-none"
                 )
               }
             >
@@ -73,35 +84,34 @@ const TabbedContent = ({ restaurant }: Props) => {
                         </span>
                       ))}
                   </div>
-                  <span className="relative z-1 rounded-full bg-gray-600 px-3 py-1.5 font-medium text-white  mt-8">
+                  <span className="relative z-1 rounded-full bg-gray-400 px-3 py-1.5 font-medium text-white  mt-8">
                     {location}
                   </span>
                 </section>
                 <div className="group relative">
-                  <h1 className="mt-3 font-semibold leading-6 text-gray-900 group-hover:text-gray-600 py-5">
-                    {restaurantName}
-                  </h1>
+                  <div className="flex justify-between">
+                    <h1 className="mt-3 font-semibold leading-6 text-gray-900  py-5">
+                      {restaurantName}
+                    </h1>
+                    {/* FOR FEATURED RESTAURANTS */}
+                    {isFeatured && (
+                      <span className="relative z-10 rounded-full bg-white px-3 py-1.5 text-xs text-red-600 mt-12 mb-1 border-2 border-red-600">
+                        Featured
+                      </span>
+                    )}
+                  </div>
                   <hr className="" />
                   <div className="mt-8 items-center gap-x-4 flex  justify-between pb-10">
                     <div className="stars flex justify-start">
                       <div className="flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(
-                              5 > rating ? "text-yellow-400" : "text-gray-200",
-                              "h-5 w-5 flex-shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
+                        <Stars rating={avgRating} />
                       </div>
                       <span className="p-2 bg-indigo-50 rounded-full ml-3">
-                        4.5
+                        {avgRating}
                       </span>
                     </div>
                     <div className="flex justify-start">
-                      <ChatBubbleBottomCenterTextIcon className="w-6 text-indigo-500 mr-3" />{" "}
+                      <ChatBubbleBottomCenterTextIcon className="w-6 text-orange-600 mr-3" />{" "}
                       {totalReviews} Reviews
                     </div>
                   </div>

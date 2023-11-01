@@ -1,5 +1,20 @@
 import moment from "moment";
-import { CurrencyDollarIcon } from "@heroicons/react/24/solid"; // Make sure to import the icon from the correct library
+import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import { Reviews } from "@/data-layer/restaurant-entities";
+
+// AVG REVIEW RATING
+export const calculateReviewRatingAverage = (
+  reviews: Reviews[] | undefined
+) => {
+  if (!reviews) return 0;
+  if (!reviews.length) return 0;
+
+  return (
+    reviews.reduce((sum, review) => {
+      return sum + review.attributes.stars;
+    }, 0) / reviews.length
+  );
+};
 
 // PROCESSING COMMA SEPERATED STRINGS INTO ARRAY FOR $in STRAPI FILTER
 export const convertStringToArray = (
@@ -81,24 +96,24 @@ export const generatePriceIcons = (price: string) => {
     case "EXPENSIVE":
       return (
         <span className="text-xs flex">
-          <CurrencyDollarIcon className="w-5" />
-          <CurrencyDollarIcon className="w-5" />
-          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
           {/* <span className="mt-[.4rem] ml-1">Price</span> */}
         </span>
       );
     case "REGULAR":
       return (
         <span className="text-xs flex">
-          <CurrencyDollarIcon className="w-5" />
-          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
           {/* <span className="mt-[.4rem] ml-1">Price</span> */}
         </span>
       );
     case "CHEAP":
       return (
         <span className="text-xs flex">
-          <CurrencyDollarIcon className="w-5" />
+          <CurrencyDollarIcon className="w-5 text-gray-500" />
           {/* <span className="mt-[.4rem] ml-1">Price</span> */}
         </span>
       );

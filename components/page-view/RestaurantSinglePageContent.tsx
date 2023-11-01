@@ -40,7 +40,7 @@ const RestaurantSingleContent = ({ restaurant }: Props) => {
               <div className="absolute inset-0 bg-black opacity-50"></div>
             </div>
             {/* Header Content */}
-            <div className="relative z-20 mx-auto max-w-2xl text-center  -mt-12">
+            <div className="relative z-0 mx-auto max-w-2xl text-center  -mt-12">
               <h2 className="font-bold tracking-tight text-white sm:text-4xl">
                 {restaurant.attributes.name}
               </h2>

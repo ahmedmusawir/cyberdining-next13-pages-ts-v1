@@ -1,0 +1,38 @@
+import { Review, Reviews } from "@/data-layer/restaurant-entities";
+import { calculateReviewRatingAverage } from "@/utils";
+import React from "react";
+import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+
+interface StarsProps {
+  reviews?: Reviews[];
+  rating?: number;
+}
+
+const Stars: React.FC<StarsProps> = ({ reviews, rating }) => {
+  const reviewRating = rating || calculateReviewRatingAverage(reviews);
+  const iconColor = "#f97c0b";
+
+  const renderStars = (): JSX.Element[] => {
+    const stars: JSX.Element[] = [];
+
+    for (let i = 0; i < 5; i++) {
+      const difference = parseFloat((reviewRating - i).toFixed(1));
+      if (difference >= 1)
+        stars.push(<BsStarFill className="w-4 h-4 mr-1" color={iconColor} />);
+      else if (difference < 1 && difference > 0) {
+        if (difference <= 0.2)
+          stars.push(<BsStar className="w-4 h-4 mr-1" color={iconColor} />);
+        else if (difference > 0.2 && difference <= 0.6)
+          stars.push(<BsStarHalf className="w-4 h-4 mr-1" color={iconColor} />);
+        else
+          stars.push(<BsStarFill className="w-4 h-4 mr-1" color={iconColor} />);
+      } else stars.push(<BsStar className="w-4 h-4 mr-1" color={iconColor} />);
+    }
+
+    return stars;
+  };
+
+  return <div className="flex items-center">{renderStars()}</div>;
+};
+
+export default Stars;
