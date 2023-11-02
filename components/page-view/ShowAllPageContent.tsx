@@ -10,7 +10,7 @@ import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import JobSortForm from "../forms/NameSortForm";
+import NameSortForm from "../forms/NameSortForm";
 import SearchForm from "../forms/SearchForm";
 import { Page } from "../globals";
 import RestaurantList from "../list-view/RestaurantList";
@@ -112,7 +112,7 @@ const ShowAllPageContent = ({
                     className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/20"
                     aria-hidden="true"
                   />
-                  <JobSortForm />
+                  <NameSortForm />
                 </div>
               </div>
             </div>

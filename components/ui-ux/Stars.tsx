@@ -3,12 +3,12 @@ import { calculateReviewRatingAverage } from "@/utils";
 import React from "react";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 
-interface StarsProps {
+interface Props {
   reviews?: Reviews[];
   rating?: number;
 }
 
-const Stars: React.FC<StarsProps> = ({ reviews, rating }) => {
+const Stars = ({ reviews, rating }: Props) => {
   const reviewRating = rating || calculateReviewRatingAverage(reviews);
   const iconColor = "#f97c0b";
 

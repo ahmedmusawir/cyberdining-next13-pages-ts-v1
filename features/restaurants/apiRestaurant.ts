@@ -12,6 +12,11 @@ export const apiRestaurant = createApi({
     // getRestaurantsByNameSort: builder.query<RestaurantApiResponse, string>({
     //   query: (sortOrder) => `/restaurants-by-name-sort?sortOrder=${sortOrder}`,
     // }),
+    // Home Search function
+    getRestaurantsByLocation: builder.query<RestaurantApiResponse, string>({
+      query: (locationId) => `/restaurants-by-location?id=${locationId}`,
+    }),
+
     // This function handles all the Search, Sort and Filtering
     getRestaurants: builder.query<RestaurantApiResponse, FiltersState>({
       query: (filters) => {
@@ -60,5 +65,6 @@ export const apiRestaurant = createApi({
 export const {
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
+  useGetRestaurantsByLocationQuery,
   // useGetRestaurantsByNameSortQuery,
 } = apiRestaurant;

@@ -1,24 +1,35 @@
 import {
+  apiRestaurant,
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
+import { setRestaurants } from "@/features/restaurants/restaurantSlice";
 import { GlobalState } from "@/global-entities";
-import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
+import { RestaurantApiResponse } from "@/services/restaurantService";
+import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NameSortForm from "../forms/NameSortForm";
+import SearchForm from "../forms/SearchForm";
 import { Page } from "../globals";
 import RestaurantList from "../list-view/RestaurantList";
 import SidebarDesktop from "../ui-ux/SidebarDesktop";
 import SidebarMobile from "../ui-ux/SidebarMobile";
 
-const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
+interface Props {
+  initialRestaurants: RestaurantApiResponse;
+  cuisineId: string;
+}
+
+const CuisinePageContent = ({ initialRestaurants, cuisineId }: Props) => {
+  // console.log("Initial Rests:", initialRestaurants);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
-  const searchFilters = { ...filters, searchTerm };
+
+  const searchFilters = { ...filters, cuisineIds: [cuisineId] };
 
   const {
     data: restaurants,
@@ -31,27 +42,16 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
   const initialMount = useRef(true);
 
   useEffect(() => {
+    dispatch(setRestaurants(initialRestaurants));
+  }, [initialRestaurants, dispatch]);
+
+  useEffect(() => {
     if (initialMount.current) {
       initialMount.current = false;
     } else {
       getRestaurants(filters);
     }
-  }, [filters, getRestaurants]);
-
-  // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(apiRestaurant.util.resetApiState());
-  //   };
-  // }, [dispatch]);
-
-  // KEEP THIS SHIT FOR TESTING. TO SEE THE ENTIRE STATE
-  // const entireState = useSelector((state: GlobalState) => state);
-  // console.log(entireState);
-
-  // useEffect(() => {
-  //   dispatch(setRestaurants(restaurants));
-  // }, [restaurants, dispatch]);
+  }, [filters]);
 
   return (
     <>
@@ -95,8 +95,8 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
                 aria-hidden="true"
               />
 
-              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
-                {/* <SearchForm /> */}
+              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+                <SearchForm />
 
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                   {/* Separator */}
@@ -114,10 +114,9 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
                 {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="Search Results For ..."
+                    title="All Restaurants..."
                     restaurants={restaurants}
-                    searchTerm={searchTerm}
-                    // restaurants={searchResults}
+                    // restaurants={initialRestaurants}
                   />
                 )}
               </div>
@@ -129,4 +128,4 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
   );
 };
 
-export default SearchPageContent;
+export default CuisinePageContent;

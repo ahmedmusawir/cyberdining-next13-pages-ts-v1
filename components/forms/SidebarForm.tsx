@@ -1,9 +1,9 @@
 import React from "react";
 import SwitchButtonFeatured from "../ui-ux/SwitchButtonFeatured";
 import SwitchButtonOnlineOrdering from "../ui-ux/SwitchButtonOnlineOrdering";
-import CheckboxGroupCuisines from "../ui-ux/CheckboxGroupCuisines";
-import CheckboxGroupLocations from "../ui-ux/CheckboxGroupLocations";
-import CheckboxGroupPrice from "../ui-ux/CheckboxGroupPrice";
+import CheckboxGroupCuisines from "../ui-ux/restaurants/CheckboxGroupCuisines";
+import CheckboxGroupLocations from "../ui-ux/restaurants/CheckboxGroupLocations";
+import CheckboxGroupPrice from "../ui-ux/restaurants/CheckboxGroupPrice";
 
 const SidebarForm = () => {
   return (

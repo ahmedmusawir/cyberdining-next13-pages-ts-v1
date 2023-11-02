@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import HomeSearchForm from "@/components/forms/HomeSearchForm";
 
 const Hero = () => {
   return (
@@ -57,30 +58,8 @@ const Hero = () => {
                   <p className="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
                     Cupidatat minim id magna ipsum sint dolor qui. Sunt sit
                   </p>
-                  {/* <div className="mt-10 flex items-center gap-x-6"> */}
-                  <div className="mt-10 items-center gap-x-6">
-                    <div className="relative mt-2 rounded-md shadow-sm flex-grow">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                        <MagnifyingGlassIcon
-                          className="h-5 w-5 text-gray-400"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="block w-full rounded-md border-0 py-[0.5rem] pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="City or Restaurant or Cuisine"
-                      />
-                    </div>
-                    <button
-                      type="button"
-                      className="rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-2"
-                    >
-                      Let's go
-                    </button>
-                  </div>
+                  {/* HOME TEXT SEARCH INPUT */}
+                  <HomeSearchForm />
                 </div>
                 <div className="hidden lg:flex mt-14 justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0">
                   <div className="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80">

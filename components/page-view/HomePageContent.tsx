@@ -1,7 +1,8 @@
-import { Container, Hero, Row } from "../ui-ux";
-import FeaturedCities from "../ui-ux/FeaturedCities";
-import FeaturedCuisines from "../ui-ux/FeaturedCuisines";
-import FeaturedRestaurants from "../ui-ux/FeaturedRestaurants";
+import { Container, Row } from "../ui-ux";
+import Hero from "../ui-ux/home/Hero";
+import FeaturedCities from "../ui-ux/home/FeaturedCities";
+import FeaturedCuisines from "../ui-ux/home/FeaturedCuisines";
+import FeaturedRestaurants from "../ui-ux/home/FeaturedRestaurants";
 
 const HomePageContent = () => {
   return (

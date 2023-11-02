@@ -1,43 +1,52 @@
+import Link from "next/link";
 import React from "react";
 
 const posts = [
   {
+    id: 4,
+    title: "Asian/Chinese",
+    href: "/cuisine-page?cuisineId=4",
+    description:
+      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
+    imageUrl:
+      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554591/52063148_eqhsif.webp",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
+  },
+  {
     id: 1,
-    title: "Atlanta",
-    href: "#",
+    title: "Indian",
+    href: "/cuisine-page?cuisineId=1",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693548606/atlanta_kxdt9u.jpg",
+      // "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550556/54337931_p834um.webp",
+      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554590/51255427_o1ggyp.webp",
+
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
   },
   {
-    id: 2,
-    title: "Savanna",
-    href: "#",
+    id: 8,
+    title: "Mexican",
+    href: "/cuisine-page?cuisineId=8",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693548607/savanna_mj4ngr.jpg",
-  },
-  {
-    id: 3,
-    title: "Alpharetta",
-    href: "#",
-    description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
-    imageUrl:
-      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693548606/lawrenceville_kxrbzb.jpg",
+      "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550268/52663349_ssymlb.webp",
+    date: "Mar 16, 2020",
+    datetime: "2020-03-16",
   },
   // More posts...
 ];
 
-const FeaturedCities = () => {
+const FeaturedCuisines = () => {
   return (
-    <div className="bg-white py-12 sm:py-12">
+    <div className="bg-white py-2 sm:py-3">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight  text-indigo-600 sm:text-4xl">
-            Top Cities
+            Top Cuisines
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600">
             Learn how to grow your business with our expert advice.
@@ -61,10 +70,10 @@ const FeaturedCities = () => {
                 Find Georgia's best cuisines here ...
               </div>
               <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
-                <a href={post.href}>
+                <Link href={post.href}>
                   <span className="absolute inset-0" />
                   {post.title}
-                </a>
+                </Link>
               </h3>
             </article>
           ))}
@@ -73,5 +82,4 @@ const FeaturedCities = () => {
     </div>
   );
 };
-
-export default FeaturedCities;
+export default FeaturedCuisines;

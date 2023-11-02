@@ -121,6 +121,13 @@ const TabbedContent = ({ restaurant }: Props) => {
                     {restaurantDescription}
                   </p>
                 </div>
+                {onlineOrdreing && (
+                  <div className="btn-holder">
+                    <button className="btn btn-outline btn-sm btn-success float-right mt-5">
+                      Order Online
+                    </button>
+                  </div>
+                )}
                 <div className="mt-8 items-center  pb-12">
                   <div className="items-center">
                     <h4>Photos</h4>

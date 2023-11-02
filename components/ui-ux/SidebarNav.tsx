@@ -1,14 +1,10 @@
-import { resetAll } from "@/features/restaurants/restaurantFilterSlice";
+import { useResetHandler } from "@/hooks/useResetHandler";
 import { QrCodeIcon } from "@heroicons/react/24/outline";
-import { useDispatch } from "react-redux";
 import SidebarForm from "../forms/SidebarForm";
 
 const SidebarNav = () => {
-  const dispatch = useDispatch();
+  const handleReset = useResetHandler();
 
-  const handleReset = () => {
-    dispatch(resetAll());
-  };
   return (
     <nav className="flex flex-1 flex-col">
       <ul role="list" className="flex flex-1 flex-col gap-y-7 mt-7">

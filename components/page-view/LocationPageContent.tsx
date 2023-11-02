@@ -1,4 +1,5 @@
 import {
+  useGetRestaurantsByLocationQuery,
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
@@ -13,12 +14,13 @@ import RestaurantList from "../list-view/RestaurantList";
 import SidebarDesktop from "../ui-ux/SidebarDesktop";
 import SidebarMobile from "../ui-ux/SidebarMobile";
 
-const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
+const SearchPageContent = ({ locationId }: { locationId: string }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
-  const searchFilters = { ...filters, searchTerm };
+
+  const searchFilters = { ...filters, locationIds: [locationId] };
 
   const {
     data: restaurants,
@@ -114,9 +116,9 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
                 {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="Search Results For ..."
+                    title="Results For Locaion ..."
                     restaurants={restaurants}
-                    searchTerm={searchTerm}
+                    // searchTerm={searchTerm}
                     // restaurants={searchResults}
                   />
                 )}

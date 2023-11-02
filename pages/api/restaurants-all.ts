@@ -6,5 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const data = await datasource?.getAllRestaurants();
+
+  res.setHeader("Cache-Control", "no-store, max-age=0");
   res.status(200).json(data);
 }

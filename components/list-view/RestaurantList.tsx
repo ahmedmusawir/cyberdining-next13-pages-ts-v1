@@ -11,10 +11,11 @@ function classNames(...classes: string[]) {
 
 interface Props {
   title: string;
+  searchTerm?: string;
   restaurants: RestaurantApiResponse;
 }
 
-const RestaurantList = ({ title, restaurants }: Props) => {
+const RestaurantList = ({ title, searchTerm, restaurants }: Props) => {
   const dispatch = useDispatch();
   const currentPage = useSelector(
     (state: GlobalState) => state.restaurantFilters.currentPage
@@ -34,7 +35,10 @@ const RestaurantList = ({ title, restaurants }: Props) => {
       <div className="w-full">
         <div className="w-full text-center lg:text-left">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mt-5 px-5">
-            {title}
+            {title}{" "}
+            {searchTerm && (
+              <span className="text-gray-400 px-5">{searchTerm}</span>
+            )}
           </h2>
           <p className="mt-2 text-lg leading-8 text-gray-600 px-5">
             Learn how to grow your business with our expert advice.
@@ -42,7 +46,7 @@ const RestaurantList = ({ title, restaurants }: Props) => {
           {/* For screens below 2xl, maintain the current layout */}
           <div className="mt-16 space-y-20 lg:mt-12 lg:space-y-20 2xl:space-y-0 2xl:grid 2xl:grid-cols-2 2xl:gap-8">
             {restaurants?.data.map((restaurant) => (
-              <RestaurantBlock restaurant={restaurant} />
+              <RestaurantBlock key={restaurant.id} restaurant={restaurant} />
             ))}
           </div>
 

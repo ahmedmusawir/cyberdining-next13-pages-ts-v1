@@ -14,7 +14,7 @@ export interface RestaurantDataSource {
   ) => Promise<RestaurantApiResponse>;
   getRestaurantSlugs: () => Promise<string[]>;
   getRestaurantBySlug: (slug: string) => Promise<RestaurantData>;
-  getAllRestaurantsByNameSort: (sortOrder: string) => Promise<RestaurantData>;
+  // getAllRestaurantsByNameSort: (sortOrder: string) => Promise<RestaurantData>;
   getRestaurantById: (postId: number) => Promise<RestaurantData>;
   getAllRestaurantsBySearchFilters: (
     query: FiltersState

@@ -12,11 +12,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { query } = context;
   const searchTerm = query.searchTerm as string; // Make sure to validate and sanitize the searchTerm
 
-  // CONSIDER SANITIZING THE SEARCH TERM HERE ...
+  // Call your API function using the searchTerm
+  // const searchResults = await datasource.getAllRestaurantsBySearchTerm(
+  //   searchTerm
+  // );
 
   return {
     props: {
       searchTerm,
+      // searchResults,
     },
   };
 };

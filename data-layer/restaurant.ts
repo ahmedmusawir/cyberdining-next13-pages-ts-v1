@@ -24,24 +24,24 @@ export const getAllRestaurants = async (): Promise<RestaurantApiResponse> => {
 };
 
 // GETS ALL RESTAURANTS
-export const getAllRestaurantsByNameSort = async (
-  sortOrder: string
-): Promise<RestaurantApiResponse> => {
-  const query = qs.stringify(
-    {
-      sort: [`name:${sortOrder}`],
+// export const getAllRestaurantsByNameSort = async (
+//   sortOrder: string
+// ): Promise<RestaurantApiResponse> => {
+//   const query = qs.stringify(
+//     {
+//       sort: [`name:${sortOrder}`],
 
-      populate: "*",
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
+//       populate: "*",
+//     },
+//     {
+//       encodeValuesOnly: true,
+//     }
+//   );
 
-  const response = await restaurantService.getAll(query);
+//   const response = await restaurantService.getAll(query);
 
-  return response;
-};
+//   return response;
+// };
 
 // GETS ALL RESTAURANTS BY CUISINE ID
 export const getAllRestaurantsByCuisineId = async (
