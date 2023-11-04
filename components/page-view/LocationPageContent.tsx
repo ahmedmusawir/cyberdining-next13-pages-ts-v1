@@ -11,6 +11,7 @@ import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NameSortForm from "../forms/NameSortForm";
+import SearchForm from "../forms/SearchForm";
 import { Page } from "../globals";
 import RestaurantList from "../list-view/RestaurantList";
 import SidebarDesktop from "../ui-ux/SidebarDesktop";
@@ -99,7 +100,7 @@ const LocationPageContent = ({
               />
 
               <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
-                {/* <SearchForm /> */}
+                <SearchForm />
 
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                   {/* Separator */}
