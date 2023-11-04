@@ -1,13 +1,12 @@
-import { Fragment } from "react";
-import { Menu, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { Page } from "../globals";
-import Head from "next/head";
-import Reviews from "../ui-ux/Reviews";
-import TabbedContent from "../ui-ux/TabbedContent";
-import BookingForm from "../forms/BookingForm";
 import { RestaurantData } from "@/data-layer/restaurant-entities";
+import { Popover } from "@headlessui/react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import BookingForm from "../forms/BookingForm";
+import { Page } from "../globals";
+import Reviews from "../ui-ux/Reviews";
+import Spinner from "../ui-ux/Spinner";
+import TabbedContent from "../ui-ux/TabbedContent";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,8 +16,14 @@ interface Props {
   restaurant: RestaurantData;
 }
 
-const RestaurantSingleContent = ({ restaurant }: Props) => {
-  // console.log("Restaurant Single Page Content Data", restaurant);
+const RestaurantSinglePageContent = ({ restaurant }: Props) => {
+  const router = useRouter();
+
+  // Providing spinner while next.js generates static pages when fallback is true
+  if (router.isFallback) {
+    return <Spinner />;
+  }
+
   return (
     <>
       <Head>
@@ -90,4 +95,4 @@ const RestaurantSingleContent = ({ restaurant }: Props) => {
   );
 };
 
-export default RestaurantSingleContent;
+export default RestaurantSinglePageContent;

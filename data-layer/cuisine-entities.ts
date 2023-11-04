@@ -5,6 +5,8 @@ export interface CuisineDataSource {
   getAllRestaurantsByCuisine: (
     cuisineId: number
   ) => Promise<CuisineApiResponse>;
+
+  getCuisineIds: () => Promise<number[]>;
 }
 
 export interface CuisineData {

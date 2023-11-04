@@ -5,7 +5,7 @@ const posts = [
   {
     id: 4,
     title: "Asian/Chinese",
-    href: "/cuisine-page?cuisineId=4",
+    href: "/cuisine-page/4?cuisineName=Chinese",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
@@ -16,11 +16,10 @@ const posts = [
   {
     id: 1,
     title: "Indian",
-    href: "/cuisine-page?cuisineId=1",
+    href: "/cuisine-page/1?cuisineName=Indian",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
-      // "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693550556/54337931_p834um.webp",
       "https://res.cloudinary.com/dyb0qa58h/image/upload/v1693554590/51255427_o1ggyp.webp",
 
     date: "Mar 16, 2020",
@@ -29,7 +28,7 @@ const posts = [
   {
     id: 8,
     title: "Mexican",
-    href: "/cuisine-page?cuisineId=8",
+    href: "/cuisine-page/8?cuisineName=Mexican",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:

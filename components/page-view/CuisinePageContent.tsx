@@ -20,22 +20,26 @@ import SidebarMobile from "../ui-ux/SidebarMobile";
 interface Props {
   initialRestaurants: RestaurantApiResponse;
   cuisineId: string;
+  cuisineName: string;
 }
 
-const CuisinePageContent = ({ initialRestaurants, cuisineId }: Props) => {
-  // console.log("Initial Rests:", initialRestaurants);
+const CuisinePageContent = ({
+  initialRestaurants,
+  cuisineId,
+  cuisineName,
+}: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
 
-  const searchFilters = { ...filters, cuisineIds: [cuisineId] };
+  const cuisineFilters = { ...filters, cuisineIds: [cuisineId] };
 
   const {
     data: restaurants,
     error: restaurantError,
     isLoading: restaurantIsLoading,
-  } = useGetRestaurantsQuery(searchFilters);
+  } = useGetRestaurantsQuery(cuisineFilters);
 
   const [getRestaurants, { data, error, isLoading }] =
     useLazyGetRestaurantsQuery();
@@ -111,12 +115,11 @@ const CuisinePageContent = ({ initialRestaurants, cuisineId }: Props) => {
 
             <main className="pb-10 min-h-full">
               <div className="">
-                {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="All Restaurants..."
+                    title="Cuisine Results For ..."
                     restaurants={restaurants}
-                    // restaurants={initialRestaurants}
+                    searchTerm={cuisineName}
                   />
                 )}
               </div>

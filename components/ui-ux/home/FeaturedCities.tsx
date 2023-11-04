@@ -5,7 +5,7 @@ const posts = [
   {
     id: 1,
     title: "Atlanta",
-    href: "/location-page?locationId=1",
+    href: "/location-page/1?locationName=Atlanta",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
@@ -14,7 +14,7 @@ const posts = [
   {
     id: 3,
     title: "Marietta",
-    href: "/location-page?locationId=3",
+    href: "/location-page/3?locationName=Marietta",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:
@@ -23,7 +23,7 @@ const posts = [
   {
     id: 5,
     title: "Alpharetta",
-    href: "/location-page?locationId=5",
+    href: "/location-page/5?locationName=Alpharetta",
     description:
       "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
     imageUrl:

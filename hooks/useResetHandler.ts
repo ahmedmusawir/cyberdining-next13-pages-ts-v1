@@ -7,16 +7,18 @@ export const useResetHandler = () => {
   const dispatch = useDispatch();
 
   const handleReset = () => {
+    // console.log("Cuisine Page: ", router.pathname);
     // Check if the current path is one of the predetermined source paths
     const isSourcePath = [
       "/search-page",
-      "/location-page",
-      "/cuisine-page",
+      "/location-page/[locationId]",
+      "/cuisine-page/[cuisineId]",
     ].includes(router.pathname);
 
     if (isSourcePath) {
       // If on one of the source paths, redirect to "/restaurants"
       router.push("/restaurants");
+      dispatch(resetAll());
     } else {
       // Otherwise, dispatch the resetAll action
       dispatch(resetAll());

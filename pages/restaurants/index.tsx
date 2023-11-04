@@ -27,6 +27,6 @@ export const getStaticProps = async () => {
     props: {
       initialRestaurants: restaurants,
     },
-    revalidate: 5,
+    revalidate: 3600, // In seconds, so 3600 seconds = 1 hour
   };
 };

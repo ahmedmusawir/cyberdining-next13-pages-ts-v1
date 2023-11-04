@@ -79,7 +79,10 @@ const TabbedContent = ({ restaurant }: Props) => {
                   <div className="mt-8 flex items-center gap-x-4 text-xs">
                     {cuisinesArray.length &&
                       cuisinesArray.map((cuisine) => (
-                        <span className="relative z-1 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-800 hover:bg-gray-100">
+                        <span
+                          key={cuisine.id}
+                          className="relative z-1 rounded-full bg-purple-100 px-3 py-1.5 font-medium text-gray-800 hover:bg-gray-100"
+                        >
                           {cuisine.attributes.name}
                         </span>
                       ))}

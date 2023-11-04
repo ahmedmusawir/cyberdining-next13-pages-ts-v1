@@ -111,13 +111,11 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
 
             <main className="pb-10 min-h-full">
               <div className="">
-                {/* Your content */}
                 {restaurants && (
                   <RestaurantList
                     title="Search Results For ..."
                     restaurants={restaurants}
                     searchTerm={searchTerm}
-                    // restaurants={searchResults}
                   />
                 )}
               </div>

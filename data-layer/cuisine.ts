@@ -29,3 +29,14 @@ export const getAllRestaurantsByCuisine = async (
 
   return response;
 };
+
+// GETS ONLY ALL CUISINE ID-S AS AN ARRAY OF NUMBERS
+export const getCuisineIds = async (): Promise<number[]> => {
+  const query = qs.stringify({ fields: ["id"] }, { encodeValuesOnly: true });
+
+  const response = await cuisineService.getAll(query);
+
+  const ids = response.data.map((cuisine) => cuisine.id);
+
+  return ids;
+};

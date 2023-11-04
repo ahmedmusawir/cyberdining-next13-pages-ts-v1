@@ -3,7 +3,9 @@ import {
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
+import { setRestaurants } from "@/features/restaurants/restaurantSlice";
 import { GlobalState } from "@/global-entities";
+import { RestaurantApiResponse } from "@/services/restaurantService";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
@@ -14,23 +16,37 @@ import RestaurantList from "../list-view/RestaurantList";
 import SidebarDesktop from "../ui-ux/SidebarDesktop";
 import SidebarMobile from "../ui-ux/SidebarMobile";
 
-const SearchPageContent = ({ locationId }: { locationId: string }) => {
+interface Props {
+  initialRestaurants: RestaurantApiResponse;
+  locationId: string;
+  locationName: string;
+}
+
+const LocationPageContent = ({
+  initialRestaurants,
+  locationId,
+  locationName,
+}: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
 
-  const searchFilters = { ...filters, locationIds: [locationId] };
+  const locationFilters = { ...filters, locationIds: [locationId] };
 
   const {
     data: restaurants,
     error: restaurantError,
     isLoading: restaurantIsLoading,
-  } = useGetRestaurantsQuery(searchFilters);
+  } = useGetRestaurantsQuery(locationFilters);
 
   const [getRestaurants, { data, error, isLoading }] =
     useLazyGetRestaurantsQuery();
   const initialMount = useRef(true);
+
+  useEffect(() => {
+    dispatch(setRestaurants(initialRestaurants));
+  }, [initialRestaurants, dispatch]);
 
   useEffect(() => {
     if (initialMount.current) {
@@ -39,21 +55,6 @@ const SearchPageContent = ({ locationId }: { locationId: string }) => {
       getRestaurants(filters);
     }
   }, [filters, getRestaurants]);
-
-  // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(apiRestaurant.util.resetApiState());
-  //   };
-  // }, [dispatch]);
-
-  // KEEP THIS SHIT FOR TESTING. TO SEE THE ENTIRE STATE
-  // const entireState = useSelector((state: GlobalState) => state);
-  // console.log(entireState);
-
-  // useEffect(() => {
-  //   dispatch(setRestaurants(restaurants));
-  // }, [restaurants, dispatch]);
 
   return (
     <>
@@ -116,10 +117,9 @@ const SearchPageContent = ({ locationId }: { locationId: string }) => {
                 {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="Results For Locaion ..."
+                    title="Location Results For ..."
                     restaurants={restaurants}
-                    // searchTerm={searchTerm}
-                    // restaurants={searchResults}
+                    searchTerm={locationName}
                   />
                 )}
               </div>
@@ -131,4 +131,4 @@ const SearchPageContent = ({ locationId }: { locationId: string }) => {
   );
 };
 
-export default SearchPageContent;
+export default LocationPageContent;

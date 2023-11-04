@@ -23,26 +23,6 @@ export const getAllRestaurants = async (): Promise<RestaurantApiResponse> => {
   return response;
 };
 
-// GETS ALL RESTAURANTS
-// export const getAllRestaurantsByNameSort = async (
-//   sortOrder: string
-// ): Promise<RestaurantApiResponse> => {
-//   const query = qs.stringify(
-//     {
-//       sort: [`name:${sortOrder}`],
-
-//       populate: "*",
-//     },
-//     {
-//       encodeValuesOnly: true,
-//     }
-//   );
-
-//   const response = await restaurantService.getAll(query);
-
-//   return response;
-// };
-
 // GETS ALL RESTAURANTS BY CUISINE ID
 export const getAllRestaurantsByCuisineId = async (
   cuisineId: number
@@ -147,7 +127,7 @@ export const getRestaurantSlugs = async (): Promise<string[]> => {
 
   const response = await restaurantService.getAll(query);
 
-  const slugs = response.data.map((slug) => slug.attributes.slug);
+  const slugs = response.data.map((restaurant) => restaurant.attributes.slug);
 
   return slugs;
 };

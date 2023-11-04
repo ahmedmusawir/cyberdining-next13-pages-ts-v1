@@ -14,9 +14,11 @@ const SingleRestaurantPage = ({ restaurant }: Props) => {
 export const getStaticPaths = async () => {
   const slugs = await datasource.getRestaurantSlugs();
   const paths = slugs.map((slug) => ({ params: { slug } }));
+  // console.log("PATHS IN STATIC PATHS IN /restaurants/[slug].tsx", paths);
   return {
     paths,
     fallback: true,
+    // fallback: "blocking",
   };
 };
 
@@ -24,7 +26,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
   const slug = context.params!.slug as string;
   const restaurant = await datasource.getRestaurantBySlug(slug);
 
-  console.log("Company Data: Static Props", restaurant);
+  console.log("Restaurant Data: Static Props", restaurant.attributes.name);
 
   if (!restaurant) {
     return {
@@ -39,7 +41,7 @@ export const getStaticProps = async (context: GetStaticPropsContext) => {
     props: {
       restaurant,
     },
-    revalidate: 5,
+    revalidate: 3600, // In seconds, so 3600 seconds = 1 hour
   };
 };
 
