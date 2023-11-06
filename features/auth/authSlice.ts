@@ -36,7 +36,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       localStorage.removeItem("authFlag"); // Remove authFlag on authentication failure.
     },
-    logout: (state) => {
+    setLogout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
       state.error = null;
@@ -64,7 +64,7 @@ export const {
   startLoading,
   authenticationSuccess,
   authenticationFailure,
-  logout,
+  setLogout,
   setUser,
   setError,
   openLoginModal,

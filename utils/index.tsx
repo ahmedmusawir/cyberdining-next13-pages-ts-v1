@@ -146,3 +146,24 @@ export const qsToStrapi = async (endpoint: string) => {
 
   return await response.json();
 };
+
+export const qsToNihad = async (endpoint: string) => {
+  const STRAPI_API_KEY = process.env.STRAPI_KEY_NIHAD;
+
+  // console.log("api key", STRAPI_API_KEY);
+
+  const headers = {
+    Authorization: `Bearer ${STRAPI_API_KEY}`,
+  };
+
+  const response = await fetch(`${BASE_URL}${endpoint}`, {
+    headers: headers,
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error((data as any)?.error?.message || "An error occurred");
+  }
+
+  return await response.json();
+};

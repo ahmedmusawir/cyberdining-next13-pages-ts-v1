@@ -55,7 +55,12 @@ export interface User {
   blocked: boolean;
   createdAt: string;
   updatedAt: string;
-  profileImage: {
-    url: string;
-  };
+  profileImage: string;
+  reviews: Review[];
+}
+
+export interface Review {
+  id: number;
+  starts: number;
+  content: string;
 }
