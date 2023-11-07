@@ -61,10 +61,10 @@ const UserProfileHeader = () => {
           {user?.username}
         </h3>
         <p>{user?.email}</p>
-        <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+        {/* <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
           <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
           Los Angeles, California
-        </div>
+        </div> */}
       </div>
     </>
   );

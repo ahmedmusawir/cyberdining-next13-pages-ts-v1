@@ -1,6 +1,6 @@
+import ProfileImageForm from "@/components/forms/ProfileImageCloudinaryForm";
 import { Page } from "@/components/globals";
 import UpdatePassword from "@/components/ui-ux/authentication/UpdatePassword";
-import UploadProfileImage from "@/components/ui-ux/authentication/UploadProfileImage";
 import UserProfileHeader from "@/components/ui-ux/authentication/UserProfileHeader";
 import Head from "next/head";
 
@@ -18,7 +18,7 @@ const ProfileContent = () => {
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg border-2 border-gray-100">
                 <div className="px-6">
                   <UserProfileHeader />
-                  <UploadProfileImage />
+                  <ProfileImageForm />
                   <UpdatePassword />
                 </div>
               </div>
