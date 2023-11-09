@@ -14,19 +14,22 @@ const SignupForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = async (data: any) => {
     const { username, email, password } = data;
-    console.log("Signup Form Data:", data);
+    // console.log("Signup Form Data:", data);
 
     try {
       const result = await signup({ username, email, password }).unwrap();
 
-      console.log("Signup successful:", result);
+      // console.log("Signup successful:", result);
+      reset();
       setErrorMessage(null); // Clear any previous error messages
       toast.success("Signup successful! Please login.");
+      dispatch(openLoginModal());
     } catch (rawError) {
       const error = rawError as ApiError;
       console.error("Error during signup:", error);

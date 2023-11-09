@@ -1,4 +1,4 @@
-import { ShowAllPageContent } from "@/components/page-view";
+import ShowAllPageContent from "@/components/page-view/restaurants/ShowAllPageContent";
 import datasource from "@/data-layer";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 

@@ -1,3 +1,4 @@
+import ProfileImageCloudinaryForm from "@/components/forms/ProfileImageCloudinaryForm";
 import ProfileImageForm from "@/components/forms/ProfileImageCloudinaryForm";
 import { Page } from "@/components/globals";
 import UpdatePassword from "@/components/ui-ux/authentication/UpdatePassword";
@@ -15,10 +16,9 @@ const ProfileContent = () => {
         <main className="profile-page">
           <section className="relative py-16 bg-blueGray-200">
             <div className="container mx-auto px-4">
-              <div className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg border-2 border-gray-100">
+              <div className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg">
                 <div className="px-6">
                   <UserProfileHeader />
-                  <ProfileImageForm />
                   <UpdatePassword />
                 </div>
               </div>

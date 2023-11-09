@@ -7,7 +7,6 @@ import { GlobalState } from "@/global-entities";
 import { closeLoginModal } from "@/features/auth/authSlice";
 
 const LoginModal = () => {
-  // const { isAuthenticated, open, setOpen } = useAuth();
   const dispatch = useDispatch();
 
   const isAuthenticated = useSelector(

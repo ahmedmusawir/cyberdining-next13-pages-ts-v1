@@ -1,12 +1,12 @@
+import BookingForm from "@/components/forms/BookingForm";
+import { Page } from "@/components/globals";
+import Reviews from "@/components/ui-ux/Reviews";
+import Spinner from "@/components/ui-ux/Spinner";
+import TabbedContent from "@/components/ui-ux/TabbedContent";
 import { RestaurantData } from "@/data-layer/restaurant-entities";
 import { Popover } from "@headlessui/react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import BookingForm from "../forms/BookingForm";
-import { Page } from "../globals";
-import Reviews from "../ui-ux/Reviews";
-import Spinner from "../ui-ux/Spinner";
-import TabbedContent from "../ui-ux/TabbedContent";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -16,7 +16,7 @@ interface Props {
   restaurant: RestaurantData;
 }
 
-const RestaurantSinglePageContent = ({ restaurant }: Props) => {
+const SinglePageContent = ({ restaurant }: Props) => {
   const router = useRouter();
 
   // Providing spinner while next.js generates static pages when fallback is true
@@ -95,4 +95,4 @@ const RestaurantSinglePageContent = ({ restaurant }: Props) => {
   );
 };
 
-export default RestaurantSinglePageContent;
+export default SinglePageContent;

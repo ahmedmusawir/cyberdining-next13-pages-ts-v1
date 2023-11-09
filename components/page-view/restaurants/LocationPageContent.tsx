@@ -1,5 +1,10 @@
+import NameSortForm from "@/components/forms/NameSortForm";
+import SearchForm from "@/components/forms/SearchForm";
+import { Page } from "@/components/globals";
+import RestaurantList from "@/components/list-view/RestaurantList";
+import SidebarDesktop from "@/components/ui-ux/SidebarDesktop";
+import SidebarMobile from "@/components/ui-ux/SidebarMobile";
 import {
-  useGetRestaurantsByLocationQuery,
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
@@ -10,12 +15,6 @@ import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NameSortForm from "../forms/NameSortForm";
-import SearchForm from "../forms/SearchForm";
-import { Page } from "../globals";
-import RestaurantList from "../list-view/RestaurantList";
-import SidebarDesktop from "../ui-ux/SidebarDesktop";
-import SidebarMobile from "../ui-ux/SidebarMobile";
 
 interface Props {
   initialRestaurants: RestaurantApiResponse;

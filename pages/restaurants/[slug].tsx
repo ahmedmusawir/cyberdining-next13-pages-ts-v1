@@ -1,4 +1,4 @@
-import { RestaurantSinglePageContent } from "@/components/page-view";
+import SinglePageContent from "@/components/page-view/restaurants/SinglePageContent";
 import datasource from "@/data-layer";
 import { RestaurantData } from "@/data-layer/restaurant-entities";
 import { GetStaticPropsContext } from "next";
@@ -8,7 +8,7 @@ interface Props {
 }
 
 const SingleRestaurantPage = ({ restaurant }: Props) => {
-  return <RestaurantSinglePageContent restaurant={restaurant} />;
+  return <SinglePageContent restaurant={restaurant} />;
 };
 
 export const getStaticPaths = async () => {

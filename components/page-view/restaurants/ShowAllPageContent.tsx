@@ -1,42 +1,40 @@
+import NameSortForm from "@/components/forms/NameSortForm";
+import SearchForm from "@/components/forms/SearchForm";
+import { Page } from "@/components/globals";
+import RestaurantList from "@/components/list-view/RestaurantList";
+import SidebarDesktop from "@/components/ui-ux/SidebarDesktop";
+import SidebarMobile from "@/components/ui-ux/SidebarMobile";
 import {
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
+import { setRestaurants } from "@/features/restaurants/restaurantSlice";
 import { GlobalState } from "@/global-entities";
-import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
+import { RestaurantApiResponse } from "@/services/restaurantService";
+import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NameSortForm from "../forms/NameSortForm";
-import { Page } from "../globals";
-import RestaurantList from "../list-view/RestaurantList";
-import SidebarDesktop from "../ui-ux/SidebarDesktop";
-import SidebarMobile from "../ui-ux/SidebarMobile";
 
-const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
+const ShowAllPageContent = ({
+  initialRestaurants,
+}: {
+  initialRestaurants: RestaurantApiResponse;
+}) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
-  const searchFilters = { ...filters, searchTerm };
 
   const {
     data: restaurants,
     error: restaurantError,
     isLoading: restaurantIsLoading,
-  } = useGetRestaurantsQuery(searchFilters);
+  } = useGetRestaurantsQuery(filters);
 
   const [getRestaurants, { data, error, isLoading }] =
     useLazyGetRestaurantsQuery();
   const initialMount = useRef(true);
-
-  useEffect(() => {
-    if (initialMount.current) {
-      initialMount.current = false;
-    } else {
-      getRestaurants(filters);
-    }
-  }, [filters, getRestaurants]);
 
   // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
   // useEffect(() => {
@@ -49,9 +47,17 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
   // const entireState = useSelector((state: GlobalState) => state);
   // console.log(entireState);
 
-  // useEffect(() => {
-  //   dispatch(setRestaurants(restaurants));
-  // }, [restaurants, dispatch]);
+  useEffect(() => {
+    dispatch(setRestaurants(initialRestaurants));
+  }, [initialRestaurants, dispatch]);
+
+  useEffect(() => {
+    if (initialMount.current) {
+      initialMount.current = false;
+    } else {
+      getRestaurants(filters);
+    }
+  }, [filters]);
 
   return (
     <>
@@ -95,8 +101,8 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
                 aria-hidden="true"
               />
 
-              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
-                {/* <SearchForm /> */}
+              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+                <SearchForm />
 
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                   {/* Separator */}
@@ -111,11 +117,12 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
 
             <main className="pb-10 min-h-full">
               <div className="">
+                {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="Search Results For ..."
+                    title="All Restaurants..."
                     restaurants={restaurants}
-                    searchTerm={searchTerm}
+                    // restaurants={initialRestaurants}
                   />
                 )}
               </div>
@@ -127,4 +134,4 @@ const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
   );
 };
 
-export default SearchPageContent;
+export default ShowAllPageContent;

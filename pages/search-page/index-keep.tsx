@@ -1,4 +1,4 @@
-import { SearchPageContent } from "@/components/page-view";
+import SearchPageContent from "@/components/page-view/restaurants/SearchPageContent";
 import datasource from "@/data-layer";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 import { GetServerSideProps } from "next";

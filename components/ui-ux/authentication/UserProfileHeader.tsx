@@ -1,3 +1,4 @@
+import ProfileImageCloudinaryForm from "@/components/forms/ProfileImageCloudinaryForm";
 import { GlobalState } from "@/global-entities";
 import { UserCircleIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
@@ -15,7 +16,6 @@ const UserProfileHeader = () => {
               <img
                 alt="User Profile"
                 src={user.profileImage}
-                // src={`${baseUrl}${user.profileImage.url}`}
                 className="w-full h-full object-cover shadow-xl"
               />
             ) : (
@@ -49,7 +49,7 @@ const UserProfileHeader = () => {
             </div>
             <div className="lg:mr-4 p-3 text-center">
               <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                {user?.reviews.length}
+                {user?.reviews?.length}
               </span>
               <span className="text-sm text-blueGray-400">Reviews</span>
             </div>
@@ -61,10 +61,7 @@ const UserProfileHeader = () => {
           {user?.username}
         </h3>
         <p>{user?.email}</p>
-        {/* <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-          <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-          Los Angeles, California
-        </div> */}
+        <ProfileImageCloudinaryForm />
       </div>
     </>
   );

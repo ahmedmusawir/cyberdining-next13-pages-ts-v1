@@ -1,53 +1,34 @@
+import NameSortForm from "@/components/forms/NameSortForm";
+import { Page } from "@/components/globals";
+import RestaurantList from "@/components/list-view/RestaurantList";
+import SidebarDesktop from "@/components/ui-ux/SidebarDesktop";
+import SidebarMobile from "@/components/ui-ux/SidebarMobile";
 import {
-  apiRestaurant,
   useGetRestaurantsQuery,
   useLazyGetRestaurantsQuery,
 } from "@/features/restaurants/apiRestaurant";
-import { setRestaurants } from "@/features/restaurants/restaurantSlice";
 import { GlobalState } from "@/global-entities";
-import { RestaurantApiResponse } from "@/services/restaurantService";
-import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NameSortForm from "../forms/NameSortForm";
-import SearchForm from "../forms/SearchForm";
-import { Page } from "../globals";
-import RestaurantList from "../list-view/RestaurantList";
-import SidebarDesktop from "../ui-ux/SidebarDesktop";
-import SidebarMobile from "../ui-ux/SidebarMobile";
 
-interface Props {
-  initialRestaurants: RestaurantApiResponse;
-  cuisineId: string;
-  cuisineName: string;
-}
-
-const CuisinePageContent = ({
-  initialRestaurants,
-  cuisineId,
-  cuisineName,
-}: Props) => {
+const SearchPageContent = ({ searchTerm }: { searchTerm: string }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
-
-  const cuisineFilters = { ...filters, cuisineIds: [cuisineId] };
+  const searchFilters = { ...filters, searchTerm };
 
   const {
     data: restaurants,
     error: restaurantError,
     isLoading: restaurantIsLoading,
-  } = useGetRestaurantsQuery(cuisineFilters);
+  } = useGetRestaurantsQuery(searchFilters);
 
   const [getRestaurants, { data, error, isLoading }] =
     useLazyGetRestaurantsQuery();
   const initialMount = useRef(true);
-
-  useEffect(() => {
-    dispatch(setRestaurants(initialRestaurants));
-  }, [initialRestaurants, dispatch]);
 
   useEffect(() => {
     if (initialMount.current) {
@@ -55,7 +36,22 @@ const CuisinePageContent = ({
     } else {
       getRestaurants(filters);
     }
-  }, [filters]);
+  }, [filters, getRestaurants]);
+
+  // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(apiRestaurant.util.resetApiState());
+  //   };
+  // }, [dispatch]);
+
+  // KEEP THIS SHIT FOR TESTING. TO SEE THE ENTIRE STATE
+  // const entireState = useSelector((state: GlobalState) => state);
+  // console.log(entireState);
+
+  // useEffect(() => {
+  //   dispatch(setRestaurants(restaurants));
+  // }, [restaurants, dispatch]);
 
   return (
     <>
@@ -99,8 +95,8 @@ const CuisinePageContent = ({
                 aria-hidden="true"
               />
 
-              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-                <SearchForm />
+              <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6 justify-end">
+                {/* <SearchForm /> */}
 
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                   {/* Separator */}
@@ -117,9 +113,9 @@ const CuisinePageContent = ({
               <div className="">
                 {restaurants && (
                   <RestaurantList
-                    title="Cuisine Results For ..."
+                    title="Search Results For ..."
                     restaurants={restaurants}
-                    searchTerm={cuisineName}
+                    searchTerm={searchTerm}
                   />
                 )}
               </div>
@@ -131,4 +127,4 @@ const CuisinePageContent = ({
   );
 };
 
-export default CuisinePageContent;
+export default SearchPageContent;

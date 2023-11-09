@@ -10,44 +10,40 @@ import { ChevronDoubleRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NameSortForm from "../forms/NameSortForm";
-import SearchForm from "../forms/SearchForm";
-import { Page } from "../globals";
-import RestaurantList from "../list-view/RestaurantList";
-import SidebarDesktop from "../ui-ux/SidebarDesktop";
-import SidebarMobile from "../ui-ux/SidebarMobile";
+import NameSortForm from "../../forms/NameSortForm";
+import SearchForm from "../../forms/SearchForm";
+import { Page } from "../../globals";
+import RestaurantList from "../../list-view/RestaurantList";
+import SidebarDesktop from "../../ui-ux/SidebarDesktop";
+import SidebarMobile from "../../ui-ux/SidebarMobile";
 
-const ShowAllPageContent = ({
-  initialRestaurants,
-}: {
+interface Props {
   initialRestaurants: RestaurantApiResponse;
-}) => {
-  // console.log("Initial Rests:", initialRestaurants);
+  cuisineId: string;
+  cuisineName: string;
+}
+
+const CuisinePageContent = ({
+  initialRestaurants,
+  cuisineId,
+  cuisineName,
+}: Props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
   const filters = useSelector((state: GlobalState) => state.restaurantFilters);
 
+  const cuisineFilters = { ...filters, cuisineIds: [cuisineId] };
+
   const {
     data: restaurants,
     error: restaurantError,
     isLoading: restaurantIsLoading,
-  } = useGetRestaurantsQuery(filters);
+  } = useGetRestaurantsQuery(cuisineFilters);
 
   const [getRestaurants, { data, error, isLoading }] =
     useLazyGetRestaurantsQuery();
   const initialMount = useRef(true);
-
-  // THIS IS TO CLEAR THE RTK CACHE. DON'T REMOVE
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(apiRestaurant.util.resetApiState());
-  //   };
-  // }, [dispatch]);
-
-  // KEEP THIS SHIT FOR TESTING. TO SEE THE ENTIRE STATE
-  // const entireState = useSelector((state: GlobalState) => state);
-  // console.log(entireState);
 
   useEffect(() => {
     dispatch(setRestaurants(initialRestaurants));
@@ -119,12 +115,11 @@ const ShowAllPageContent = ({
 
             <main className="pb-10 min-h-full">
               <div className="">
-                {/* Your content */}
                 {restaurants && (
                   <RestaurantList
-                    title="All Restaurants..."
+                    title="Cuisine Results For ..."
                     restaurants={restaurants}
-                    // restaurants={initialRestaurants}
+                    searchTerm={cuisineName}
                   />
                 )}
               </div>
@@ -136,4 +131,4 @@ const ShowAllPageContent = ({
   );
 };
 
-export default ShowAllPageContent;
+export default CuisinePageContent;

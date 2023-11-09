@@ -7,7 +7,6 @@ export const useResetHandler = () => {
   const dispatch = useDispatch();
 
   const handleReset = () => {
-    // console.log("Cuisine Page: ", router.pathname);
     // Check if the current path is one of the predetermined source paths
     const isSourcePath = [
       "/search-page",

@@ -1,6 +1,4 @@
-import { SearchPageContent } from "@/components/page-view";
-import datasource from "@/data-layer";
-import { RestaurantApiResponse } from "@/services/restaurantService";
+import SearchPageContent from "@/components/page-view/restaurants/SearchPageContent";
 import { GetServerSideProps } from "next";
 
 export default function SearchPage({ searchTerm }: { searchTerm: string }) {

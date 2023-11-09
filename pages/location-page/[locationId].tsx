@@ -1,10 +1,10 @@
 import datasource from "@/data-layer";
-import CuisinePageContent from "@/components/page-view/CuisinePageContent";
+import CuisinePageContent from "@/components/page-view/restaurants/CuisinePageContent";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { useRouter } from "next/router";
-import LocationPageContent from "@/components/page-view/LocationPageContent";
+import LocationPageContent from "@/components/page-view/restaurants/LocationPageContent";
 
 interface Props {
   initialRestaurants: RestaurantApiResponse;

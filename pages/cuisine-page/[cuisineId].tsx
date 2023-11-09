@@ -1,5 +1,5 @@
 import datasource from "@/data-layer";
-import CuisinePageContent from "@/components/page-view/CuisinePageContent";
+import CuisinePageContent from "@/components/page-view/restaurants/CuisinePageContent";
 import { RestaurantApiResponse } from "@/services/restaurantService";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
