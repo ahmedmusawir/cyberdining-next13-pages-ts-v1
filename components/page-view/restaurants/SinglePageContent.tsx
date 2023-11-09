@@ -24,6 +24,10 @@ const SinglePageContent = ({ restaurant }: Props) => {
     return <Spinner />;
   }
 
+  // console.log("Single Restaurant - SinglePageContent", restaurant);
+
+  const reviews = restaurant.attributes.reviews.data;
+
   return (
     <>
       <Head>
@@ -52,7 +56,8 @@ const SinglePageContent = ({ restaurant }: Props) => {
             </div>
           </Popover>
 
-          <main className="-mt-12 pb-8 z-30 relative">
+          {/* <main className="-mt-12 pb-8 z-30 relative"> */}
+          <main className="-mt-12 pb-8 z-0 relative">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
               <h1 className="sr-only">{restaurant.attributes.name}</h1>
               {/* Main 3 column grid */}
@@ -89,6 +94,7 @@ const SinglePageContent = ({ restaurant }: Props) => {
             </div>
           </main>
           <Reviews />
+          {/* <Reviews reviews={reviews} /> */}
         </div>
       </Page>
     </>
